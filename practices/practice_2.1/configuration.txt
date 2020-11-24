@@ -1,0 +1,80 @@
+config t
+ip domain-name adminredes.escom.ipn.mx
+ip ssh rsa keypair-name sshkey
+crypto key generate rsa usage-keys label sshkey modulus 1024
+ip ssh v 2
+ip ssh time-out 30
+ip ssh authentication-retries 3
+line vty 0 15
+password cisco
+login local
+transport input ssh telnet
+exit
+username admin privilege 15 password admin
+exit
+
+copy ru st
+
+
+
+# Router 1
+config t
+
+int f 0/0
+ip add 10.0.5.254 255.255.255.0
+no shu
+exit
+
+int f 0/1
+ip add 10.0.2.253 255.255.255.0
+no shu
+exit
+
+# Router 2
+config t
+
+int f 0/0
+ip add 10.0.6.254 255.255.255.0
+no shu
+exit
+
+int f 0/1
+ip add 10.0.3.253 255.255.255.0
+no shu
+exit
+
+# Router 3
+config t
+
+int f 0/0
+ip add 10.0.7.254 255.255.255.0
+no shu
+exit
+
+int f 0/1
+ip add 10.0.4.253 255.255.255.0
+no shu
+exit
+
+# Router 4
+config t
+
+int f 0/0
+ip add 10.0.2.254 255.255.255.0
+no shu
+exit
+
+int f 0/1
+ip add 10.0.3.254 255.255.255.0
+no shu
+exit
+
+int f 1/0
+ip add 10.0.4.254 255.255.255.0
+no shu
+exit
+
+int f 1/1
+ip add 10.0.1.254 255.255.255.0
+no shu
+exit
