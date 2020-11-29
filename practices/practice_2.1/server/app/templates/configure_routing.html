@@ -1,17 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Configure routing</h1>
-  <div>
-    <h4 id="log_info"></h4>
-    <button id="bttn">Configurar todos los routers</button>
-  </div>
-  <a href="/">Return to index</a>
-</body>
-<script src="{{ url_for('static', filename='js/configure_routing.js') }}"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/tailwind.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <title>Document</title>
+  </head>
+  <body class="h-screen flex flex-col poppins">
+    <div
+      class="bg-white flex-shrink-0 flex flex-col z-10"
+      style="flex-basis: 100px; box-shadow: 0px 4px 12px rgba(37, 38, 94, 0.06)"
+    >
+      <div class="h-10 flex justify-center">
+        <div class="flex items-center" style="flex-basis: 1200px">
+          <h4 class="poppins text-sm font-bold flex-grow text-purple-600">
+            joel@ubuntuvm:/configure_routing
+          </h4>
+        </div>
+      </div>
+      <div class="h-px bg-gray-300"></div>
+      <div class="flex-grow flex justify-center">
+        <div class="flex items-center" style="flex-basis: 1200px">
+          <h4 class="poppins text-xl font-bold flex-grow">
+            Networking managment
+          </h4>
+        </div>
+      </div>
+      <div class="h-px bg-gray-300"></div>
+    </div>
+    <div
+      class="bg-gray-100 flex-grow flex min-h-0 justify-center bg-opacity-75"
+    >
+      <div class="flex" style="flex-basis: 1200px">
+        <nav
+          class="overflow-y-auto flex-shrink-0 pt-12"
+          style="flex-basis: 300px"
+        >
+          <div class="border border-gray-300 py-5 px-7 rounded-md">
+            <h2 class="poppins text-base font-semibold text-purple-900">
+              Menu
+            </h2>
+            <ul class="list-disc pl-5 text-indigo-900 text-sm">
+              <li><a href="/">Index</a></li>
+              <li><a href="/configure_routing">Configure routing</a></li>
+            </ul>
+          </div>
+        </nav>
+        <article class="flex-grow overflow-y-auto pl-20 pt-12">
+          <h1 class="text-4xl font-bold text-purple-900">Configure routing</h1>
+          <h2 class="font-bold text-2xl text-purple-600 mt-2 mb-2">
+            Descripción
+          </h2>
+          <p class="font-medium text-gray-600 leading-relaxed mb-1">
+            Este programa escrito en python se encarga de levantar el
+            enrutamiento en 4 routers que lo único que tienen configurado son
+            sus interfaces.
+          </p>
+          <p class="font-medium text-gray-600 leading-relaxed mb-1">
+            Se tienen que configurar se las siguiente manera los routers:
+          </p>
+          <ul class="text-gray-600 font-medium list-disc ml-5">
+            <li>R1: Enrutamiento estático</li>
+            <li>R2: Enrutamiento usando RIP</li>
+            <li>R3: Enrutamiento usando OSPF</li>
+            <li>
+              R4: Enrutamiento múltiple que permita la interoperabilidad de los
+              otros 3 routers.
+            </li>
+          </ul>
+          <h2 class="font-bold text-2xl text-purple-600 mt-2 mb-2">
+            Topología
+          </h2>
+          <img
+            src="{{ url_for('static', filename='images/topology.png') }}"
+            class="w-10/12"
+            alt="topology"
+          />
+          <h2 class="font-bold text-2xl text-purple-600 mt-2 mb-2">
+            Ejecución
+          </h2>
+          <p class="font-medium text-gray-600 leading-relaxed mb-1">
+            Este botón ejecuta el script de forma remota
+          </p>
+          <h3 id="log" class="font-bold text-lg text-red-600 mt-2 mb-2"></h3>
+          <button
+            id="remote_script"
+            class="flex-shrink-0 bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+          >
+            <span id="remote_script_content" class="inline-block"
+              >EJECUTAR</span
+            >
+            <span id="remote_script_loading" class="spin line-block hidden"
+              >⌛</span
+            >
+          </button>
+          <div class="mb-20"></div>
+        </article>
+      </div>
+    </div>
+  </body>
+  <script src="{{ url_for('static', filename='js/configure_routing.js') }}"></script>
 </html>

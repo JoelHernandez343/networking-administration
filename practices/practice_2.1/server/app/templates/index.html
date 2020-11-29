@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>This is the index</h1>
-  <a href="configure_routing">Practice 2.1 | Configure routing</a>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/tailwind.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <title>Document</title>
+  </head>
+  <body class="h-screen flex flex-col poppins">
+    <div
+      class="bg-white flex-shrink-0 flex flex-col z-10"
+      style="flex-basis: 100px; box-shadow: 0px 4px 12px rgba(37, 38, 94, 0.06)"
+    >
+      <div class="h-10 flex justify-center">
+        <div class="flex items-center" style="flex-basis: 1200px">
+          <h4 class="poppins text-sm font-bold flex-grow text-purple-600">
+            joel@ubuntuvm:/
+          </h4>
+        </div>
+      </div>
+      <div class="h-px bg-gray-300"></div>
+      <div class="flex-grow flex justify-center">
+        <div class="flex items-center" style="flex-basis: 1200px">
+          <h4 class="poppins text-xl font-bold flex-grow">
+            Networking managment
+          </h4>
+        </div>
+      </div>
+      <div class="h-px bg-gray-300"></div>
+    </div>
+    <div
+      class="bg-gray-100 flex-grow flex min-h-0 justify-center bg-opacity-75"
+    >
+      <div class="flex pt-12" style="flex-basis: 1200px">
+        <nav class="overflow-y-auto flex-shrink-0" style="flex-basis: 300px">
+          <div class="border border-gray-300 py-5 px-7 rounded-md">
+            <h2 class="poppins text-base font-semibold text-purple-900">
+              Menu
+            </h2>
+            <ul class="list-disc pl-5 text-indigo-900 text-sm">
+              <li><a href="/">Index</a></li>
+              <li><a href="/configure_routing">Configure routing</a></li>
+            </ul>
+          </div>
+        </nav>
+        <article class="flex-grow overflow-y-auto pl-20">
+          <h1 class="text-4xl font-bold text-purple-900 mb-6">Index</h1>
+          <p class="font-medium text-gray-600 leading-relaxed">
+            Este es el index. Este es un servicio que corre en un servidor
+            desarrollado y construido con Flask!
+          </p>
+        </article>
+      </div>
+    </div>
+  </body>
 </html>
