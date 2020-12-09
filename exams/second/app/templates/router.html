@@ -1,0 +1,47 @@
+<!-- prettier-ignore -->
+{% extends "public_template.html" %}
+
+<!-- prettier-ignore -->
+{% import "macros/menu.html" as menu %}
+
+<!-- prettier-ignore -->
+{% import "macros/interface_item.html" as interface_item %}
+
+<!-- prettier-ignore -->
+{% import "macros/user_item.html" as user_item %}
+
+<!-- prettier-ignore -->
+{% block title %}{{ router.ip_max }}{% endblock %}
+
+<!-- prettier-ignore -->
+{% block menu %}
+
+{{ menu.menu(routes) }}
+
+{% endblock %}
+
+{% block main %}
+
+<h1 class="text-4xl font-semibold text-dark-blue mb-2">
+  Router {{ router.ip_max }}
+</h1>
+<p class="font-normal text-gray-600 leading-relaxed pb-2">
+  Esta es la información, interfaces y usuarios del router.
+</p>
+<h2 class="text-2xl font-semibold text-dark-blue mb-2">Información</h2>
+<p class="font-bold text-blue">Nombre del host</p>
+<p>{{ router.hostname }}</p>
+<p class="font-bold text-blue">Marca</p>
+<p>{{ router.brand }}</p>
+<p class="font-bold text-blue">Sistema operativo</p>
+<p>{{ router.os }}</p>
+<p class="font-bold text-blue">Número de interfaces activas</p>
+<p>{{ router.active_interfaces }}</p>
+<h2 class="text-2xl font-semibold text-dark-blue my-2">Interfaces</h2>
+<!-- prettier-ignore -->
+{% for i in router.interfaces %} {{ interface_item.interface_item(i) }} {% endfor %}
+<h2 class="text-2xl font-semibold text-dark-blue my-2">Usuarios</h2>
+<!-- prettier-ignore -->
+{% for u in router.users %} {{ user_item.user_item(u) }} {% endfor %}
+<!-- prettier-ignore -->
+{% endblock %}

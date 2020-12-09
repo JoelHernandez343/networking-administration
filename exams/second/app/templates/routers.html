@@ -1,0 +1,28 @@
+<!-- prettier-ignore -->
+{% extends "public_template.html" %}
+
+<!-- prettier-ignore -->
+{% import "macros/menu.html" as menu %}
+
+<!-- prettier-ignore -->
+{% import "macros/router_item.html" as router_item %}
+
+<!-- prettier-ignore -->
+{% block title %}Routers{% endblock %}
+
+<!-- prettier-ignore -->
+{% block menu %}
+
+{{ menu.menu(routes) }}
+
+{% endblock %}
+
+{% block main %}
+
+<h1 class="text-4xl font-semibold text-dark-blue mb-2">Lista de routers</h1>
+<p class="font-normal text-gray-600 leading-relaxed pb-2">
+  Esta es la lista de routers que se encuentran registrados en la base de datos
+</p>
+{% for r in routers %} {{ router_item.router_item(r) }} {% endfor %}
+<!-- prettier-ignore -->
+{% endblock %}

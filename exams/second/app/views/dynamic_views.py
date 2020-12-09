@@ -1,5 +1,9 @@
-from flask import render_template
+import json
+
+from flask import render_template, jsonify
 from app import app
+
+from database.manage import router as rt, interface as intf, user
 
 
 @app.route("/routers")
@@ -18,15 +22,25 @@ def routers(subpath=""):
 
 
 def render_routers():
-    return "This is the list of routers"
+    return render_template(
+        "routers.html", routes=app.routes, routers=rt.get_all(app.session)
+    )
 
 
 def render_router(router):
-    # Se checa la existencia del router, si no, un 404
-    # si existe, devolvemos la template
+    r = rt.get(app.session, router)
 
-    return f"This is the router {router}"
+    if r is None:
+        return f"This router doesnt exits {router}", 404
+
+    return render_template("router.html", routes=app.routes, router=r)
 
 
 def render_interface_router(router, interface):
-    return f"This is the interface {interface} of router {router}"
+    print(router, interface)
+    i = intf.get(app.session, {"router_id": router, "name": interface})
+
+    if i is None:
+        return f"This interface {interface} doesnt exits in {router}", 404
+
+    return render_template("interface.html", routes=app.routes, interface=i)

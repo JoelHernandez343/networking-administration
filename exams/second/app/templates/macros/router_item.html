@@ -1,0 +1,26 @@
+<!-- prettier-ignore -->
+{% macro router_item(router={}) -%}
+<div class="w-72 border border-gray-300 rounded-md inline-flex">
+  <a
+    href="{{ '/routers/'~router.ip_max }}"
+    class="hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer flex-grow p-4"
+  >
+    <img
+      class="h-16 mb-4"
+      src="{{ url_for('static', filename='images/router-icon.png') }}"
+    />
+    <p class="text-2xl font-semibold text-dark-blue mb-2">
+      {{ 'Router '~router.ip_max }}
+    </p>
+    <p class="font-bold text-blue">Nombre del host</p>
+    <p>{{ router.hostname }}</p>
+    <p class="font-bold text-blue">Marca</p>
+    <p>{{ router.brand }}</p>
+    <p class="font-bold text-blue">Sistema operativo</p>
+    <p>{{ router.os }}</p>
+    <p class="font-bold text-blue">Número de interfaces activas</p>
+    <p>{{ router.active_interfaces }}</p>
+  </a>
+</div>
+<!-- prettier-ignore -->
+{%- endmacro %}

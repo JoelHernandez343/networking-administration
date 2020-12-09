@@ -1,0 +1,38 @@
+<!-- prettier-ignore -->
+{% extends "public_template.html" %}
+
+<!-- prettier-ignore -->
+{% import "macros/menu.html" as menu %}
+
+<!-- prettier-ignore -->
+{% block title %}{{ interface.name }}{% endblock %}
+
+<!-- prettier-ignore -->
+{% block menu %}
+
+{{ menu.menu(routes) }}
+
+{% endblock %}
+
+{% block main %}
+
+<h1 class="text-xl font-semibold text-dark-blue mb-2">
+  Router {{ interface.router_id }}
+</h1>
+<h1 class="text-4xl font-semibold text-dark-blue mb-2">
+  Interfaz {{ interface.name }}
+</h1>
+<p class="font-normal text-gray-600 leading-relaxed pb-2">
+  Esta es la información de la interfaz
+</p>
+<h2 class="text-2xl font-semibold text-dark-blue mb-2">Información</h2>
+<p class="font-bold text-blue">Dirección ip configurada</p>
+<p>{{ interface.ip }}</p>
+<p class="font-bold text-blue">Máscara de subred configurada</p>
+<p>{{ interface.mask }}</p>
+<p class="font-bold text-blue">Dirección de red</p>
+<p>{{ interface.net }}</p>
+<p class="font-bold text-blue">Estado</p>
+<p>{% if interface.is_active %}Activa{% else %}Apagada{% endif %}</p>
+<!-- prettier-ignore -->
+{% endblock %}

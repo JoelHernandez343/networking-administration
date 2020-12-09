@@ -53,3 +53,35 @@
 .spin {
   animation: spin 2s linear infinite;
 }
+
+.text-blue {
+  color: #0069ff;
+}
+
+.text-dark-blue {
+  color: #031b4e;
+}
+
+.arrow {
+  transform: rotate(0deg);
+  transition: all 0.4s ease-in-out;
+}
+
+.arrow-rotate {
+  transform: rotate(90deg);
+  transition: all 0.4s ease-in-out;
+}
+
+.expansion-closed {
+  height: 0px;
+  transition: all 0.4s cubic-bezier(0, 1.06, 0.74, 0.98);
+  overflow: hidden;
+}
+
+.expansion-opened {
+  transition: all 0.4s cubic-bezier(0, 1.06, 0.74, 0.98);
+}
+
+.aux {
+  transition: all 0.4s cubic-bezier(0, 1.06, 0.74, 0.98);
+}
