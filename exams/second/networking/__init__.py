@@ -72,7 +72,7 @@ def toggle_interface(ip, interface, on):
     session = net.login(ip)
     session.timeout = 10
 
-    if not interface in net.get_all_interfaces(session):
+    if interface not in net.get_all_interfaces(session):
         print(f"The interface {interface} does not exists.")
         return
 

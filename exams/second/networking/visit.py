@@ -6,7 +6,7 @@ def visit_it(source, current):
     session = net.login(current)
     log("Visited")
 
-    if not source is None:
+    if source is not None:
         shared.topology.add_edge(source["name"], shared.hostname)
         log(f"Added edge ({shared.hostname}, {source['name']})")
 

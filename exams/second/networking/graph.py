@@ -1,7 +1,8 @@
-import networkx as nx 
-import matplotlib.pyplot as plt 
+import networkx as nx
+import matplotlib.pyplot as plt
 
-from networkx.drawing.nx_agraph import write_dot 
+from networkx.drawing.nx_agraph import write_dot
+
 
 class Graph:
     def __init__(self):
@@ -14,11 +15,11 @@ class Graph:
         G = nx.Graph()
         G.add_edges_from(self.edges)
         nx.draw_networkx(G)
-        
-        write_dot(G, 'network.dot')
-        print('[Host] \'network.dot\' created.')
-        plt.savefig('network.png', format='PNG')
-        print('[Host] \'network.png\' created')
-        print('[Host] Render network...')
+
+        write_dot(G, "network.dot")
+        print("[Host] 'network.dot' created.")
+        plt.savefig("network.png", format="PNG")
+        print("[Host] 'network.png' created")
+        print("[Host] Render network...")
         plt.show()
-        print ('[Host] Done.')
+        print("[Host] Done.")
