@@ -53,7 +53,7 @@ function interfaceExpanders() {
   });
 }
 
-window.onload = event => {
+document.addEventListener('DOMContentLoaded', _ => {
   routerExpanders();
   interfaceExpanders();
-};
+});

@@ -3,14 +3,14 @@ from pexpect.exceptions import TIMEOUT
 from networking import visit, shared, net, configuration
 
 
-def get_topology():
+def discover_topology(db):
     shared.pending.append({"source": None, "dest": net.get_default_gateway()})
 
     for device in shared.pending:
         print("Visiting to " + device["dest"])
-        visit.visit_it(device["source"], device["dest"])
+        visit.visit_it(device["source"], device["dest"], db)
 
-    shared.topology.render()
+    # shared.topology.render()
 
 
 def add_user(ip, new_user, new_password):
@@ -19,13 +19,13 @@ def add_user(ip, new_user, new_password):
     session.logout()
 
 
-def delete_user(ip, user, password):
+def delete_user(ip, user):
     session = net.login(ip)
-    configuration.delete_user(session, user, password)
+    configuration.delete_user(session, user)
     session.logout()
 
 
-def change_user(ip, user, password, new_user, new_password):
+def change_user(ip, user, new_user, new_password):
     session = net.login(ip)
 
     if not net.check_user(session, user):
@@ -38,7 +38,7 @@ def change_user(ip, user, password, new_user, new_password):
         session.logout()
         return
 
-    configuration.change_user(session, user, password, new_user, new_password)
+    configuration.change_user(session, user, new_user, new_password)
 
     session.logout()
 

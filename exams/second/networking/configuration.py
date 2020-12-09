@@ -16,16 +16,16 @@ def add_user(session, new_user, new_password):
     send_commands(session, commands, exits=1)
 
 
-def delete_user(session, user, password):
+def delete_user(session, user):
     commands = [
         "config t",
-        f"no username {user} privilege 15 password {password}",
+        f"no username {user}",
     ]
     send_commands(session, commands, exits=1)
 
 
-def change_user(session, user, password, new_user, new_password):
-    delete_user(session, user, password)
+def change_user(session, user, new_user, new_password):
+    delete_user(session, user)
     add_user(session, new_user, new_password)
 
 

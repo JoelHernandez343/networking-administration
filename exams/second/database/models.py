@@ -45,6 +45,5 @@ class User(Base, DictMixIn):
         String, ForeignKey("Routers.ip_max"), primary_key=True, index=True
     )
     name = Column(String, primary_key=True, index=True)
-    password = Column(String)
 
     router = relationship("Router", backref="User")

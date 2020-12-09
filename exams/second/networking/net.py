@@ -108,6 +108,45 @@ def get_connections(session):
     return table
 
 
+def get_all_connections(session):
+    configuration.send_commands(session, ["sh run | inc interface | ip address | shu"])
+
+    lines = clear_output(session.before)
+    lines.pop(0)
+    lines.pop()
+
+    table = []
+
+    interface = None
+
+    for line in lines:
+
+        fields = line.strip().split()
+
+        if fields[0] == "interface":
+            if interface is not None:
+                table.append(interface)
+
+            interface = {
+                "name": translate_to_flask(fields[1]),
+                "ip": "unassigned",
+                "mask": "unassigned",
+                "net": "unassigned",
+                "is_active": True,
+            }
+        elif fields[0] == "ip":
+            interface["ip"] = fields[2]
+            interface["net"] = net_from_ip_mask(fields[2], fields[3])
+            interface["mask"] = fields[3]
+
+        elif fields[0] == "shutdown":
+            interface["is_active"] = False
+
+    table.append(interface)
+
+    return table
+
+
 def get_next_hop(fields):
     ip = aton(fields["ip"])
     net = aton(fields["net"])
@@ -170,7 +209,7 @@ def get_information(session):
     lines.pop(0)
     lines.pop()
 
-    return (lines[0], lines[1])
+    return {"os": lines[0], "brand": lines[1]}
 
 
 def check_interface(session, interface):
@@ -197,3 +236,11 @@ def get_all_interfaces(session):
             interfaces.append(fields[0])
 
     return interfaces
+
+
+def translate_to_flask(interface_name):
+    return interface_name.replace("/", "-")
+
+
+def translate_to_router(interface_name):
+    return interface_name.replace("-", "/")

@@ -2,11 +2,9 @@
 {% macro user_item(user={}) -%}
 <div class="w-3/4 border border-gray-300 rounded-md inline-flex flex-grow p-4">
   <div>
-    <p class="text-2xl font-semibold text-dark-blue mb-2">
-      {{ 'Usuaurio '~user.name }}
+    <p class="text-xl font-semibold text-dark-blue mb-2">
+      {{ 'Usuario '~user.name }}
     </p>
-    <p class="font-bold text-blue">Password</p>
-    <p>{{ user.password }}</p>
   </div>
 </div>
 <!-- prettier-ignore -->

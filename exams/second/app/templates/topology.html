@@ -21,5 +21,18 @@
   Este es el index. Este es un servicio que corre en un servidor desarrollado y
   construido con Flask!
 </p>
+<h3 id="log" class="font-bold text-lg text-red-600 mt-2 mb-2"></h3>
+<button
+  id="remote_script"
+  class="flex-shrink-0 bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+>
+  <span id="remote_script_content" class="inline-block">EJECUTAR</span>
+  <span id="remote_script_loading" class="spin line-block hidden">⌛</span>
+</button>
 
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block custom_scripts %}
+<script src="{{ url_for('static', filename='js/topology.js') }}"></script>
 {% endblock %}
