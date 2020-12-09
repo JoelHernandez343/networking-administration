@@ -1,0 +1,16 @@
+ssh-keygen -R 148.204.56.1
+ssh-keygen -R 148.204.56.2
+ssh-keygen -R 148.204.57.1
+ssh-keygen -R 148.204.58.1
+ssh-keygen -R 148.204.59.1
+ssh-keygen -R 148.204.60.1
+ssh-keygen -R 8.8.8.1
+ssh-keygen -R 8.8.8.2
+ssh-keygen -R 8.8.8.5
+ssh-keygen -R 8.8.8.6
+ssh-keygen -R 8.8.8.9
+ssh-keygen -R 8.8.8.10
+ssh-keygen -R 8.8.8.13
+ssh-keygen -R 8.8.8.14
+ssh-keygen -R 8.8.8.17
+ssh-keygen -R 8.8.8.18

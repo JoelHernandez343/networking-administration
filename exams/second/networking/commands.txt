@@ -1,0 +1,3 @@
+config t
+username pirata2 privilege 15 password pirata
+exit
