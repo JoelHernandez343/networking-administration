@@ -1,6 +1,9 @@
 <!-- prettier-ignore -->
-{% macro user_item(user={}) -%}
-<div class="w-3/4 border border-gray-300 rounded-md inline-flex flex-grow p-4">
+{% macro user_item(user={}, index=0) -%}
+<div
+  id="user_{{ index }}"
+  class="w-3/4 border border-gray-300 rounded-md inline-flex flex-grow p-4"
+>
   <div>
     <p class="text-xl font-semibold text-dark-blue mb-2">
       {{ 'Usuario '~user.name }}

@@ -23,6 +23,8 @@
 <p class="font-normal text-gray-600 leading-relaxed pb-2">
   Esta es la lista de routers que se encuentran registrados en la base de datos
 </p>
-{% for r in routers %} {{ router_item.router_item(r) }} {% endfor %}
+
 <!-- prettier-ignore -->
-{% endblock %}
+{% for r in routers %} {{ router_item.router_item(r) }} {% endfor %} 
+
+{% endblock%}

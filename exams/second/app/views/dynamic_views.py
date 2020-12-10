@@ -1,6 +1,6 @@
 import json
 
-from flask import render_template, jsonify
+from flask import render_template, jsonify, request
 from app import app
 
 from database.manage import router as rt, interface as intf, user
@@ -31,7 +31,7 @@ def render_router(router):
     r = rt.get(app.session, router)
 
     if r is None:
-        return f"This router doesnt exits {router}", 404
+        return jsonify({"message": f"This router {router} doesnt exist"}), 404
 
     return render_template("router.html", routes=app.routes, router=r)
 
@@ -41,6 +41,6 @@ def render_interface_router(router, interface):
     i = intf.get(app.session, {"router_id": router, "name": interface})
 
     if i is None:
-        return f"This interface {interface} doesnt exits in {router}", 404
+        return jsonify({"message": f"This router {router} doesnt exist"}), 404
 
     return render_template("interface.html", routes=app.routes, interface=i)

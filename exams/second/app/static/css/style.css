@@ -62,6 +62,14 @@
   color: #031b4e;
 }
 
+.bg-blue {
+  background-color: #0069ff;
+}
+
+.bg-dark-blue {
+  background-color: #031b4e;
+}
+
 .arrow {
   transform: rotate(0deg);
   transition: all 0.4s ease-in-out;
@@ -84,4 +92,8 @@
 
 .aux {
   transition: all 0.4s cubic-bezier(0, 1.06, 0.74, 0.98);
+}
+
+::selection {
+  background-color: #accef7;
 }

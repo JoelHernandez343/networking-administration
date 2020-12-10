@@ -25,14 +25,38 @@
 <p class="font-normal text-gray-600 leading-relaxed pb-2">
   Esta es la información de la interfaz
 </p>
+
 <h2 class="text-2xl font-semibold text-dark-blue mb-2">Información</h2>
-<p class="font-bold text-blue">Dirección ip configurada</p>
-<p>{{ interface.ip }}</p>
-<p class="font-bold text-blue">Máscara de subred configurada</p>
-<p>{{ interface.mask }}</p>
-<p class="font-bold text-blue">Dirección de red</p>
-<p>{{ interface.net }}</p>
-<p class="font-bold text-blue">Estado</p>
-<p>{% if interface.is_active %}Activa{% else %}Apagada{% endif %}</p>
+
+<div class="py-2">
+  <div class="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
+    <dt class="text-sm font-medium text-blue">Dirección ip</dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+      {{ interface.ip }}
+    </dd>
+  </div>
+
+  <div class="bg-white px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
+    <dt class="text-sm font-medium text-blue">Máscara de subred</dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+      {{ interface.mask }}
+    </dd>
+  </div>
+
+  <div class="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
+    <dt class="text-sm font-medium text-blue">Red</dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+      {{ interface.net }}
+    </dd>
+  </div>
+
+  <div class="bg-white px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
+    <dt class="text-sm font-medium text-blue">Estado</dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+      {% if interface.is_active %}Activa{% else %}Apagada{% endif %}
+    </dd>
+  </div>
+</div>
+
 <!-- prettier-ignore -->
 {% endblock %}

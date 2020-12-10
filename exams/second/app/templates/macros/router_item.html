@@ -1,25 +1,52 @@
 <!-- prettier-ignore -->
 {% macro router_item(router={}) -%}
-<div class="w-72 border border-gray-300 rounded-md inline-flex">
+<div class="w-80 border border-gray-300 rounded-md inline-flex">
   <a
     href="{{ '/routers/'~router.ip_max }}"
-    class="hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer flex-grow p-4"
+    class="hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer flex-grow"
   >
-    <img
-      class="h-16 mb-4"
-      src="{{ url_for('static', filename='images/router-icon.png') }}"
-    />
-    <p class="text-2xl font-semibold text-dark-blue mb-2">
-      {{ 'Router '~router.ip_max }}
-    </p>
-    <p class="font-bold text-blue">Nombre del host</p>
-    <p>{{ router.hostname }}</p>
-    <p class="font-bold text-blue">Marca</p>
-    <p>{{ router.brand }}</p>
-    <p class="font-bold text-blue">Sistema operativo</p>
-    <p>{{ router.os }}</p>
-    <p class="font-bold text-blue">Número de interfaces activas</p>
-    <p>{{ router.active_interfaces }}</p>
+    <div class="px-4 py-4 grid grid-cols-4 gap-x-4">
+      <dt class="text-sm font-medium text-blue col-span-3">
+        <div class="">
+          <div class="text-sm font-medium text-dark-blue">Router</div>
+          <p class="text-2xl font-semibold text-dark-blue mb-2">
+            {{ router.ip_max }}
+          </p>
+        </div>
+      </dt>
+      <dd class="text-sm text-gray-900 flex items-center justify-center">
+        <img
+          class="h-8 align-middle"
+          src="{{ url_for('static', filename='images/router-icon.png') }}"
+        />
+      </dd>
+    </div>
+
+    <div>
+      <div class="px-4 py-2">
+        <dt class="text-sm font-medium text-blue">Nombre de host</dt>
+        <dd class="mt-1 text-sm text-gray-900">{{ router.hostname }}</dd>
+      </div>
+
+      <div class="px-4 py-2">
+        <dt class="text-sm font-medium text-blue">Marca</dt>
+        <dd class="mt-1 text-sm text-gray-900">{{ router.brand }}</dd>
+      </div>
+
+      <div class="px-4 py-2">
+        <dt class="text-sm font-medium text-blue">Sistema operativo</dt>
+        <dd class="mt-1 text-sm text-gray-900">{{ router.os }}</dd>
+      </div>
+
+      <div class="px-4 py-2">
+        <dt class="text-sm font-medium text-blue">
+          Número de interfaces activas
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          {{ router.active_interfaces }}
+        </dd>
+      </div>
+    </div>
   </a>
 </div>
 <!-- prettier-ignore -->

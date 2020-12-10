@@ -13,13 +13,13 @@
     />
     <title>{% block title %}{% endblock %}</title>
   </head>
-  <body class="h-screen flex flex-col poppins">
+  <body class="h-screen flex flex-col poppins text-sm">
     <div
       class="bg-white flex-shrink-0 flex flex-col z-10"
-      style="flex-basis: 100px; box-shadow: 0px 4px 12px rgba(37, 38, 94, 0.06)"
+      style="flex-basis: 100px"
     >
       <div class="h-10 flex justify-center">
-        <div class="flex items-center" style="flex-basis: 1200px">
+        <div class="flex items-center" style="flex-basis: 1350px">
           <h4 class="poppins text-sm font-bold flex-grow text-blue">
             joel@ubuntuvm:/
           </h4>
@@ -27,7 +27,7 @@
       </div>
       <div class="h-px bg-gray-300"></div>
       <div class="flex-grow flex justify-center">
-        <div class="flex items-center" style="flex-basis: 1200px">
+        <div class="flex items-center" style="flex-basis: 1350px">
           <h4 class="poppins text-xl font-bold text-gray-800 flex-grow">
             Networking managment
           </h4>
@@ -35,13 +35,21 @@
       </div>
       <div class="h-px bg-gray-300"></div>
     </div>
-    <div class="bg-gray-50 flex-grow flex min-h-0 justify-center bg-opacity-75">
-      <div class="flex pt-12" style="flex-basis: 1200px">
-        {% block menu %}{% endblock %}
-        <main class="flex-grow overflow-y-auto pl-20">
-          {% block main %}{% endblock %}
-        </main>
-      </div>
+    <div
+      class="flex-grow flex min-h-0 justify-center bg-opacity-75 overflow-y-auto"
+    >
+      <main
+        class="flex-shrink min-h-0 pt-12 pb-16 text-gray-600"
+        style="width: 760px"
+      >
+        <nav
+          class="overflow-y-auto flex-shrink-0 fixed -ml-72"
+          style="flex-basis: 300px"
+        >
+          {% block menu %}{% endblock %}
+        </nav>
+        {% block main %}{% endblock %}
+      </main>
     </div>
   </body>
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>

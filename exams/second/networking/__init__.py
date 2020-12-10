@@ -4,6 +4,9 @@ from networking import visit, shared, net, configuration
 
 
 def discover_topology(db):
+    shared.pending = []
+    shared.visited = []
+
     shared.pending.append({"source": None, "dest": net.get_default_gateway()})
 
     for device in shared.pending:

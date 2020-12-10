@@ -8,12 +8,15 @@
       <a
         class="py-1 pl-12 pr-7 flex-grow hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer flex"
         href="{{ i['route'] }}"
-        ><span class="flex items-center pr-2"
-          ><img
-            src="{{ url_for('static', filename='images/link.png') }}"
-            class="h-4" /></span
-        >{{ i['name'] }}</a
       >
+        <span class="flex items-center pr-2">
+          <img
+            src="{{ url_for('static', filename='images/link.png') }}"
+            class="h-4"
+          />
+        </span>
+        {{ i['name'] }}
+      </a>
     </div>
   </li>
   {% endfor %}
@@ -24,25 +27,28 @@
 <!-- prettier-ignore -->
 {% macro m_routers(routers=[]) -%}
 
-<ul class="py-2">
+<ul class="">
   {% for r in routers %}
   <li>
     <div class="flex">
       <a
         class="py-3 px-7 flex-grow hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer flex"
         href="{{ r['route'] }}"
-        ><span class="flex items-center pr-2"
-          ><img
+      >
+        <span class="flex items-center pr-2 flex-shrink-0">
+          <img
             src="{{ url_for('static', filename='images/router.png') }}"
-            class="h-4" /></span
-        ><span>{{ r['ip'] }}</span
-        ><span class="font-semibold pl-2">{{ r['hostname'] }}</span></a
+            class="h-4"
+          />
+        </span>
+        <span> {{ r['ip'] }} </span>
+        <span class="font-semibold pl-2"> {{ r['hostname'] }} </span></a
       >
       <div
         class="inline-block w-10 flex items-center justify-center hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer select-none interface-expander-arrow"
       >
         <img
-          class="align-middle h-4 w-4 arrow"
+          class="align-middle h-3 w-3 arrow"
           src="{{ url_for('static', filename='images/right-arrow.png') }}"
         />
       </div>
@@ -57,43 +63,40 @@
 <!-- prettier-ignore -->
 {%- endmacro %}
 
-<!-- prettier-ignore -->
+
 {% macro menu(routes=[]) -%}
 
-<nav class="overflow-y-auto flex-shrink-0" style="flex-basis: 300px">
-  <div class="border border-gray-300 rounded-md">
-    <h2 class="poppins text-base font-semibold text-blue py-5 px-7">Menu</h2>
-    <ul class="text-indigo-900 text-sm">
-      <!-- prettier-ignore -->
-      {% for route in routes %}
-      <li>
-        <div class="flex border-t border-b border-gray-300 -mt-px">
-          <a
-            class="py-3 px-7 flex-grow hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer font-medium"
-            href="{{ route['route'] }}"
-            >{{ route['name'] }}</a
-          >
-          {% if 'routers' in route %}
-          <div
-            class="inline-block w-10 flex items-center justify-center hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer select-none router-expander-arrow"
-          >
-            <img
-              class="align-middle h-4 w-4 arrow"
-              src="{{ url_for('static', filename='images/right-arrow.png') }}"
-            />
-          </div>
-          {% endif %}
+<div class="border border-gray-300 rounded-md w-60">
+  <h2 class="poppins text-base font-semibold text-blue py-5 px-7">Menu</h2>
+  <ul class="text-indigo-900 text-sm">
+    {% for route in routes %}
+    <li>
+      <div class="flex border-t border-b border-gray-300 -mt-px">
+        <a
+          class="py-3 px-7 flex-grow hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer font-medium"
+          href="{{ route['route'] }}"
+        >
+          {{ route['name'] }}
+        </a>
+        {% if 'routers' in route %}
+        <div
+          class="inline-block w-10 flex items-center justify-center hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer select-none router-expander-arrow"
+        >
+          <img
+            class="align-middle h-3 w-3 arrow"
+            src="{{ url_for('static', filename='images/right-arrow.png') }}"
+          />
         </div>
-        <div class="router-expansion expansion-closed">
-          <!-- prettier-ignore -->
-          {% if 'routers' in route %} {{ m_routers(route['routers']) }} {% endif %}
-        </div>
-      </li>
-      <!-- prettier-ignore -->
-      {% endfor %}
-    </ul>
-  </div>
-</nav>
+        {% endif %}
+      </div>
+      <div class="router-expansion expansion-closed">
+        <!-- prettier-ignore -->
+        {% if 'routers' in route %} {{ m_routers(route['routers']) }} {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 
 <!-- prettier-ignore -->
 {%- endmacro %}

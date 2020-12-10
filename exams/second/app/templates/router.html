@@ -25,23 +25,94 @@
 <h1 class="text-4xl font-semibold text-dark-blue mb-2">
   Router {{ router.ip_max }}
 </h1>
-<p class="font-normal text-gray-600 leading-relaxed pb-2">
+<p class="font-normal leading-relaxed pb-2">
   Esta es la información, interfaces y usuarios del router.
 </p>
 <h2 class="text-2xl font-semibold text-dark-blue mb-2">Información</h2>
-<p class="font-bold text-blue">Nombre del host</p>
-<p>{{ router.hostname }}</p>
-<p class="font-bold text-blue">Marca</p>
-<p>{{ router.brand }}</p>
-<p class="font-bold text-blue">Sistema operativo</p>
-<p>{{ router.os }}</p>
-<p class="font-bold text-blue">Número de interfaces activas</p>
-<p>{{ router.active_interfaces }}</p>
+
+<div class="py-2">
+  <div class="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
+    <div class="text-sm font-medium text-blue">Nombre del host</div>
+    <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+      <input
+        id="input_hostname_router"
+        type="text"
+        value="{{ router.hostname }}"
+        class="w-full"
+        readonly="readonly"
+      />
+    </div>
+  </div>
+
+  <div class="bg-white px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
+    <dt class="text-sm font-medium text-blue">Marca</dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+      {{ router.brand }}
+    </dd>
+  </div>
+
+  <div class="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
+    <dt class="text-sm font-medium text-blue">Sistema Operativo</dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+      {{ router.os }}
+    </dd>
+  </div>
+
+  <div class="bg-white px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
+    <dt class="text-sm font-medium text-blue">Interfaces activas</dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+      {{ router.active_interfaces }}
+    </dd>
+  </div>
+</div>
+
+<h3 id="log_router" class="font-bold text-lg text-red-600 mt-2 mb-2"></h3>
+<div class="flex flex-row-reverse">
+  <button
+    id="bttn_edit_router"
+    class="mx-2 flex items-center bg-gray-200 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/edit.png') }}"
+      alt=""
+    />
+    EDITAR
+  </button>
+  <button
+    id="bttn_save_router"
+    class="hidden mx-2 flex items-center bg-gray-200 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/diskette.png') }}"
+      alt=""
+    />
+    GUARDAR
+  </button>
+  <button
+    id="bttn_cancel_router"
+    class="hidden mx-2 flex items-center bg-gray-200 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-red-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/cancel.png') }}"
+      alt=""
+    />
+    CANCELAR
+  </button>
+</div>
+
 <h2 class="text-2xl font-semibold text-dark-blue my-2">Interfaces</h2>
 <!-- prettier-ignore -->
 {% for i in router.interfaces %} {{ interface_item.interface_item(i) }} {% endfor %}
 <h2 class="text-2xl font-semibold text-dark-blue my-2">Usuarios</h2>
 <!-- prettier-ignore -->
-{% for u in router.users %} {{ user_item.user_item(u) }} {% endfor %}
+{% for u in router.users %} {{ user_item.user_item(u, loop.index) }} {% endfor %}
 <!-- prettier-ignore -->
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block custom_scripts %}
+<script src="{{ url_for('static', filename='js/router.js') }}"></script>
 {% endblock %}
