@@ -1,6 +1,7 @@
 import subprocess
 import socket
 import struct
+import re
 from pexpect import pxssh
 
 from networking import configuration, shared
@@ -213,10 +214,10 @@ def get_information(session):
 
 
 def check_interface(session, interface):
-    connections = get_connections(session)
+    connections = get_all_connections(session)
 
     for conn in connections:
-        if conn["name"] == interface:
+        if translate_to_router(conn["name"]) == interface:
             return conn
 
     return None
@@ -244,3 +245,11 @@ def translate_to_flask(interface_name):
 
 def translate_to_router(interface_name):
     return interface_name.replace("-", "/")
+
+
+def validate_ip(ip):
+    pattern = re.compile(
+        "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+    )
+
+    return pattern.search(ip)

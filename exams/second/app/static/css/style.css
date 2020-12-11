@@ -94,6 +94,22 @@
   transition: all 0.4s cubic-bezier(0, 1.06, 0.74, 0.98);
 }
 
+input {
+  border-width: 1px;
+}
+
+.no-input {
+  border-color: rgba(249, 250, 251, 1);
+}
+
+.input {
+  border-color: rgba(209, 213, 219, 1);
+}
+
+.input:focus {
+  outline-color: rgba(59, 130, 246, 0.5);
+}
+
 ::selection {
   background-color: #accef7;
 }

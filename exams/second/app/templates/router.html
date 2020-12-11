@@ -38,31 +38,31 @@
         id="input_hostname_router"
         type="text"
         value="{{ router.hostname }}"
-        class="w-full"
-        readonly="readonly"
+        class="w-full no-input py-1 px-2"
+        disabled
       />
     </div>
   </div>
 
   <div class="bg-white px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
-    <dt class="text-sm font-medium text-blue">Marca</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+    <div class="text-sm font-medium text-blue">Marca</div>
+    <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3 px-2">
       {{ router.brand }}
-    </dd>
+    </div>
   </div>
 
   <div class="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
-    <dt class="text-sm font-medium text-blue">Sistema Operativo</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+    <div class="text-sm font-medium text-blue">Sistema Operativo</div>
+    <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3 px-2">
       {{ router.os }}
-    </dd>
+    </div>
   </div>
 
   <div class="bg-white px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
-    <dt class="text-sm font-medium text-blue">Interfaces activas</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+    <div class="text-sm font-medium text-blue">Interfaces activas</div>
+    <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3 px-2">
       {{ router.active_interfaces }}
-    </dd>
+    </div>
   </div>
 </div>
 
@@ -92,15 +92,20 @@
   </button>
   <button
     id="bttn_cancel_router"
-    class="hidden mx-2 flex items-center bg-gray-200 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-red-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2"
+    class="hidden mx-2 flex items-center bg-red-100 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-red-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2"
   >
     <img
-      class="inline-block h-3 w-3 mr-2"
+      class="inline-block h-2 w-2 mr-2"
       src="{{ url_for('static', filename='images/cancel.png') }}"
       alt=""
     />
     CANCELAR
   </button>
+
+  <div id="loading_router" class="flex items-center hidden">
+    <span class="font-medium mx-2">CARGANDO</span>
+    <span class="spin inline-block">⌛</span>
+  </div>
 </div>
 
 <h2 class="text-2xl font-semibold text-dark-blue my-2">Interfaces</h2>

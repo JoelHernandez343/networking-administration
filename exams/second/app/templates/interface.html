@@ -30,33 +30,109 @@
 
 <div class="py-2">
   <div class="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
-    <dt class="text-sm font-medium text-blue">Dirección ip</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
-      {{ interface.ip }}
-    </dd>
+    <div class="text-sm font-medium text-blue">Dirección ip</div>
+    <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+      <input
+        id="input_ip"
+        type="text"
+        value="{{ interface.ip }}"
+        class="w-full no-input py-1 px-2"
+        disabled
+      />
+    </div>
   </div>
 
   <div class="bg-white px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
-    <dt class="text-sm font-medium text-blue">Máscara de subred</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
-      {{ interface.mask }}
-    </dd>
+    <div class="text-sm font-medium text-blue">Máscara de subred</div>
+    <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
+      <input
+        id="input_mask"
+        type="text"
+        value="{{ interface.mask }}"
+        class="w-full no-input py-1 px-2"
+        disabled
+      />
+    </div>
   </div>
 
   <div class="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
-    <dt class="text-sm font-medium text-blue">Red</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
-      {{ interface.net }}
-    </dd>
+    <div class="text-sm font-medium text-blue">Red</div>
+    <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3 px-2">
+      <span id="network_field"> {{ interface.net }} </span>
+    </div>
   </div>
 
   <div class="bg-white px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6">
-    <dt class="text-sm font-medium text-blue">Estado</dt>
-    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
-      {% if interface.is_active %}Activa{% else %}Apagada{% endif %}
-    </dd>
+    <div class="text-sm font-medium text-blue">Estado</div>
+    <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3 px-2">
+      <input
+        id="input_active"
+        type="checkbox"
+        {%
+        if
+        interface.is_active
+        %}checked{%
+        else
+        %}
+        {%
+        endif
+        %}
+        class="no-input"
+        disabled
+      />
+      <span class="ml-2" id="span_active">
+        {% if interface.is_active %}Activa{% else %}Desactivada{% endif %}
+      </span>
+    </div>
+  </div>
+</div>
+
+<h3 id="log" class="font-bold text-lg text-red-600 mt-2 mb-2"></h3>
+<div class="flex flex-row-reverse">
+  <button
+    id="bttn_edit"
+    class="mx-2 flex items-center bg-gray-200 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/edit.png') }}"
+      alt=""
+    />
+    EDITAR
+  </button>
+  <button
+    id="bttn_save"
+    class="hidden mx-2 flex items-center bg-gray-200 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/diskette.png') }}"
+      alt=""
+    />
+    GUARDAR
+  </button>
+  <button
+    id="bttn_cancel"
+    class="hidden mx-2 flex items-center bg-red-100 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-red-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-2 w-2 mr-2"
+      src="{{ url_for('static', filename='images/cancel.png') }}"
+      alt=""
+    />
+    CANCELAR
+  </button>
+
+  <div id="loading" class="flex items-center hidden">
+    <span class="font-medium mx-2">CARGANDO</span>
+    <span class="spin inline-block">⌛</span>
   </div>
 </div>
 
 <!-- prettier-ignore -->
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block custom_scripts %}
+<script src="{{ url_for('static', filename='js/interface.js') }}"></script>
 {% endblock %}

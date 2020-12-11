@@ -5,46 +5,46 @@
     href="{{ '/routers/'~router.ip_max }}"
     class="hover:bg-gray-100 transition ease-in-out duration-150 cursor-pointer flex-grow"
   >
-    <div class="px-4 py-4 grid grid-cols-4 gap-x-4">
-      <dt class="text-sm font-medium text-blue col-span-3">
+    <div class="px-4 pt-4 grid grid-cols-4 gap-x-4">
+      <div class="text-sm font-medium text-blue col-span-3">
         <div class="">
           <div class="text-sm font-medium text-dark-blue">Router</div>
           <p class="text-2xl font-semibold text-dark-blue mb-2">
             {{ router.ip_max }}
           </p>
         </div>
-      </dt>
-      <dd class="text-sm text-gray-900 flex items-center justify-center">
+      </div>
+      <div class="text-sm text-gray-900 flex items-center justify-center">
         <img
-          class="h-8 align-middle"
+          class="h-8 align-midivle"
           src="{{ url_for('static', filename='images/router-icon.png') }}"
         />
-      </dd>
+      </div>
     </div>
 
     <div>
       <div class="px-4 py-2">
-        <dt class="text-sm font-medium text-blue">Nombre de host</dt>
-        <dd class="mt-1 text-sm text-gray-900">{{ router.hostname }}</dd>
+        <div class="text-sm font-medium text-blue">Nombre de host</div>
+        <div class="mt-1 text-sm text-gray-900">{{ router.hostname }}</div>
       </div>
 
       <div class="px-4 py-2">
-        <dt class="text-sm font-medium text-blue">Marca</dt>
-        <dd class="mt-1 text-sm text-gray-900">{{ router.brand }}</dd>
+        <div class="text-sm font-medium text-blue">Marca</div>
+        <div class="mt-1 text-sm text-gray-900">{{ router.brand }}</div>
       </div>
 
       <div class="px-4 py-2">
-        <dt class="text-sm font-medium text-blue">Sistema operativo</dt>
-        <dd class="mt-1 text-sm text-gray-900">{{ router.os }}</dd>
+        <div class="text-sm font-medium text-blue">Sistema operativo</div>
+        <div class="mt-1 text-sm text-gray-900">{{ router.os }}</div>
       </div>
 
       <div class="px-4 py-2">
-        <dt class="text-sm font-medium text-blue">
+        <div class="text-sm font-medium text-blue">
           Número de interfaces activas
-        </dt>
-        <dd class="mt-1 text-sm text-gray-900">
+        </div>
+        <div class="mt-1 text-sm text-gray-900">
           {{ router.active_interfaces }}
-        </dd>
+        </div>
       </div>
     </div>
   </a>

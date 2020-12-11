@@ -38,18 +38,17 @@
     <div
       class="flex-grow flex min-h-0 justify-center bg-opacity-75 overflow-y-auto"
     >
-      <main
-        class="flex-shrink min-h-0 pt-12 pb-16 text-gray-600"
-        style="width: 760px"
-      >
-        <nav
-          class="overflow-y-auto flex-shrink-0 fixed -ml-72"
-          style="flex-basis: 300px"
-        >
-          {% block menu %}{% endblock %}
-        </nav>
-        {% block main %}{% endblock %}
-      </main>
+      <div class="flex-shrink">
+        <main class="min-h-0 pt-12 pb-16 text-gray-600" style="width: 760px">
+          <nav
+            class="overflow-y-auto flex-shrink-0 fixed -ml-72"
+            style="flex-basis: 300px"
+          >
+            {% block menu %}{% endblock %}
+          </nav>
+          {% block main %}{% endblock %}
+        </main>
+      </div>
     </div>
   </body>
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>

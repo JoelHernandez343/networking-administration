@@ -1,4 +1,5 @@
-current_router = {};
+let current_router = {};
+let editRouter, cancelRouter, saveRoutee, inputHostname, loadingRouter;
 
 async function getRouterInformation() {
   router_id = window.location.href.split('/').slice(-1)[0];
@@ -29,41 +30,49 @@ function logSomeTime(logId, message) {
   setTimeout(() => (log.innerHTML = ''), 3000);
 }
 
+function toggleInputRouter(enable) {
+  inputHostname.disabled = !enable;
+  inputHostname.classList.toggle('no-input', !enable);
+  inputHostname.classList.toggle('input', enable);
+}
+
+function toggleLoadingRouter(show) {
+  loadingRouter.classList.toggle('hidden', !show);
+}
+
 function getRouterButtons() {
   return {
-    edit: document.getElementById('bttn_edit_router'),
+    editRouter: document.getElementById('bttn_edit_router'),
     cancelRouter: document.getElementById('bttn_cancel_router'),
     saveRouter: document.getElementById('bttn_save_router'),
     inputHostname: document.getElementById('input_hostname_router'),
+    loadingRouter: document.getElementById('loading_router'),
   };
 }
 
 function showModifyRouter() {
-  ({ edit, cancelRouter, saveRouter, inputHostname } = getRouterButtons());
-
-  edit.classList.add('hidden');
+  editRouter.classList.add('hidden');
   cancelRouter.classList.remove('hidden');
   saveRouter.classList.remove('hidden');
 
-  inputHostname.readOnly = false;
+  toggleInputRouter(true);
   inputHostname.focus();
 }
 
 async function hideModifyRouter() {
-  ({ edit, cancelRouter, saveRouter, inputHostname } = getRouterButtons());
-
-  edit.classList.remove('hidden');
+  editRouter.classList.remove('hidden');
   cancelRouter.classList.add('hidden');
   saveRouter.classList.add('hidden');
 
-  inputHostname.readOnly = true;
+  toggleInputRouter(false);
   inputHostname.value = current_router['hostname'];
 }
 
 function saveDataRouter() {
-  ({ cancelRouter, saveRouter } = getRouterButtons());
-  cancelRouter.disabled = true;
-  saveRouter.disabled = true;
+  cancelRouter.classList.add('hidden');
+  saveRouter.classList.add('hidden');
+  toggleLoadingRouter(true);
+  toggleInputRouter(false);
 
   let req = {
     type: 'modify',
@@ -85,17 +94,22 @@ function saveDataRouter() {
 
     current_router = await getRouterInformation();
 
-    cancelRouter.disabled = false;
-    saveRouter.disabled = false;
+    toggleLoadingRouter(false);
 
     hideModifyRouter();
   });
 }
 
 document.addEventListener('DOMContentLoaded', async _ => {
-  ({ edit, cancelRouter, saveRouter } = getRouterButtons());
+  ({
+    editRouter,
+    cancelRouter,
+    saveRouter,
+    inputHostname,
+    loadingRouter,
+  } = getRouterButtons());
 
-  edit.addEventListener('click', showModifyRouter);
+  editRouter.addEventListener('click', showModifyRouter);
   cancelRouter.addEventListener('click', hideModifyRouter);
   saveRouter.addEventListener('click', saveDataRouter);
 

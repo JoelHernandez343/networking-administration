@@ -1,14 +1,56 @@
 <!-- prettier-ignore -->
 {% macro user_item(user={}, index=0) -%}
 <div
-  id="user_{{ index }}"
-  class="w-3/4 border border-gray-300 rounded-md inline-flex flex-grow p-4"
+  class="{% if index%2==0 %} bg-white {% else %} bg-gray-50 {% endif %} px-4 py-4 grid grid-cols-10 gap-x-4"
 >
-  <div>
-    <p class="text-xl font-semibold text-dark-blue mb-2">
-      {{ 'Usuario '~user.name }}
-    </p>
+  <div class="flex items-center">
+    <p class="font-medium text-blue">Usuario</p>
+  </div>
+  <div class="mt-1 sm:mt-0 sm:col-span-3 flex items-center">
+    <p class="text-sm text-gray-900">{{ user.name }}</p>
+  </div>
+  <div class="flex items-center">
+    <p class="font-medium text-blue">Password</p>
+  </div>
+  <div class="mt-1 sm:mt-0 sm:col-span-3 flex items-center">
+    <p class="text-sm text-gray-900">****</p>
+  </div>
+  <div class="col-span-2 flex flex-row-reverse">
+    <button
+      id="bttn_delete_user_{{ index }}"
+      class="h-8 w-8 p-2 mx-1 flex items-center bg-red-100 text-gray-900 rounded-full shadow-md hover:bg-red-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2"
+    >
+      <img
+        src="{{ url_for('static', filename='images/recycle-bin.png') }}"
+        alt=""
+      />
+    </button>
+
+    <button
+      id="bttn_edit_user_{{ index }}"
+      class="h-8 w-8 p-2.5 mx-1 flex items-center bg-gray-200 text-gray-900 rounded-full shadow-md hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+    >
+      <img src="{{ url_for('static', filename='images/edit.png') }}" alt="" />
+    </button>
+
+    <button
+      id="bttn_save_user_{{ index }}"
+      class="hidden h-8 w-8 p-2.5 mx-1 flex items-center bg-gray-200 text-gray-900 rounded-full shadow-md hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+    >
+      <img
+        src="{{ url_for('static', filename='images/diskette.png') }}"
+        alt=""
+      />
+    </button>
+
+    <button
+      id="bttn_cancel_user_{{ index }}"
+      class="hidden h-8 w-8 p-3 mx-1 flex items-center bg-red-100 text-gray-900 rounded-full shadow-md hover:bg-red-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2"
+    >
+      <img src="{{ url_for('static', filename='images/cancel.png') }}" alt="" />
+    </button>
   </div>
 </div>
+
 <!-- prettier-ignore -->
 {%- endmacro %}

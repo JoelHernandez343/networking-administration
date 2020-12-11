@@ -54,21 +54,25 @@ def change_hostname(ip, new_hostname):
 
 
 def change_interface(ip, interface, new_ip, new_mask):
-    session = net.login(ip)
+    try:
+        session = net.login(ip)
 
-    result = net.check_interface(session, interface)
+        result = net.check_interface(session, interface)
 
-    if result is None:
-        print(f"The interface {interface} is not activated.")
-        return
+        if result is None:
+            raise Exception(f"The interface {interface} doenst exists in the router.")
+            return
 
-    if not net.check_range_from_network(
-        new_ip, net.net_from_ip_mask(new_ip, new_mask), new_mask
-    ):
-        print(f"The new ip {new_ip} is invalid for new mask {new_mask}")
-        return
+        if not net.check_range_from_network(
+            new_ip, net.net_from_ip_mask(new_ip, new_mask), new_mask
+        ):
+            raise Exception(f"The new ip {new_ip} is invalid for new mask {new_mask}")
+            return
 
-    configuration.change_interface(session, interface, new_ip, new_mask)
+        configuration.change_interface(session, interface, new_ip, new_mask)
+
+    except TIMEOUT:
+        raise
 
 
 def toggle_interface(ip, interface, on):
@@ -76,10 +80,10 @@ def toggle_interface(ip, interface, on):
     session.timeout = 10
 
     if interface not in net.get_all_interfaces(session):
-        print(f"The interface {interface} does not exists.")
+        raise Exception(f"The interface {interface} does not exists.")
         return
 
     try:
         configuration.toggle_interface(session, interface, on)
     except TIMEOUT:
-        print(f"Disconnected from {ip}")
+        raise
