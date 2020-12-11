@@ -27,7 +27,7 @@ function logSomeTime(logId, message) {
   log = document.getElementById(logId);
 
   log.innerHTML = message;
-  setTimeout(() => (log.innerHTML = ''), 3000);
+  setTimeout(() => (log.innerHTML = ''), 5000);
 }
 
 function getNodes() {

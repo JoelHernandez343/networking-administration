@@ -163,7 +163,7 @@ def get_next_hops(session, connections):
 
     for conn in connections:
         hop = get_next_hop(conn)
-        hops.append({"source": conn["ip"], "hop": hop})
+        hops.append({"source": conn["ip"], "hop": hop, "mask": conn["mask"]})
 
     return hops
 
@@ -253,3 +253,14 @@ def validate_ip(ip):
     )
 
     return pattern.search(ip)
+
+
+def get_prefix(mask):
+    wildcard = aton(get_wildcard(mask))
+
+    counter = 0
+    while wildcard != 0:
+        counter += 1
+        wildcard >>= 1
+
+    return 32 - counter

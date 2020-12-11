@@ -2,19 +2,33 @@
 {% macro user_item(user={}, index=0) -%}
 <div
   class="{% if index%2==0 %} bg-white {% else %} bg-gray-50 {% endif %} px-4 py-4 grid grid-cols-10 gap-x-4"
+  id="user_container_{{ index }}"
 >
   <div class="flex items-center">
     <p class="font-medium text-blue">Usuario</p>
   </div>
-  <div class="mt-1 sm:mt-0 sm:col-span-3 flex items-center">
-    <p class="text-sm text-gray-900">{{ user.name }}</p>
+  <div class="mt-0 col-span-3 flex items-center">
+    <input
+      id="input_user_name_{{ index }}"
+      type="text"
+      value="{{ user.name }}"
+      class="w-full no-input py-1 px-2"
+      disabled
+    />
   </div>
   <div class="flex items-center">
     <p class="font-medium text-blue">Password</p>
   </div>
-  <div class="mt-1 sm:mt-0 sm:col-span-3 flex items-center">
-    <p class="text-sm text-gray-900">****</p>
+  <div class="mt-0 col-span-3 flex items-center">
+    <input
+      id="input_user_pass_{{ index }}"
+      type="password"
+      placeholder="****"
+      class="w-full no-input py-1 px-2"
+      disabled
+    />
   </div>
+  {% if user.name!='admin' %}
   <div class="col-span-2 flex flex-row-reverse">
     <button
       id="bttn_delete_user_{{ index }}"
@@ -49,7 +63,13 @@
     >
       <img src="{{ url_for('static', filename='images/cancel.png') }}" alt="" />
     </button>
+    <div id="loading_user_{{ index }}" class="flex items-center hidden">
+      <span class="font-medium mx-2">CARGANDO</span>
+      <span class="spin inline-block">⌛</span>
+    </div>
   </div>
+
+  {% endif %}
 </div>
 
 <!-- prettier-ignore -->

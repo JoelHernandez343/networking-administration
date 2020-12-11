@@ -11,7 +11,7 @@ from pexpect.exceptions import TIMEOUT
 
 from flask import render_template, jsonify, request
 
-from database.manage import router as rt, interface as intf, user
+from database.manage import router as rt, interface as intf, user as usr
 
 
 @app.route("/requests/discover_topology", methods=["POST"])
@@ -85,6 +85,30 @@ def get_information_interface(router, interface):
     )
 
 
+@app.route("/requests/users/<router>", methods=["POST"])
+def users_routers(router):
+    r = rt.get(app.session, router)
+    if r is None:
+        return jsonify({"message": f"This router {router} doesnt exist"}), 404
+
+    if request.is_json:
+        req = request.get_json()
+
+        if req["type"] == "create":
+            return create_user(app.session, router, req["user"])
+
+        if req["type"] == "delete":
+            return delete_user(app.session, router, req["user"])
+
+        if req["type"] == "modify":
+            return modify_user(app.session, router, req["user"])
+
+    return (
+        jsonify({"message": f"This petition {req['type']} doesnt have response"}),
+        404,
+    )
+
+
 def modify_router(db, router_id, hostname):
     try:
         networking.change_hostname(router_id, hostname)
@@ -136,5 +160,54 @@ def modify_interface(db, interface, changes):
 
         return jsonify({"message": "ok"})
 
+    except Exception as e:
+        return jsonify({"message": str(e)}), 500
+
+
+def create_user(db, router, user):
+    try:
+        if usr.get(db, {"router_id": router, "name": user["name"]}) is not None:
+            raise Exception(f"This user {user['name']} already exists")
+
+        networking.add_user(router, user["name"], user["password"])
+        usr.add(app.session, router, user)
+
+        return jsonify({"message": "ok"})
+    except Exception as e:
+        return jsonify({"message": str(e)}), 500
+
+
+def delete_user(db, router, user):
+    try:
+        if usr.get(db, {"router_id": router, "name": user["name"]}) is None:
+            raise Exception(f"This user {user['name']} doesn't exists")
+
+        networking.delete_user(router, user["name"])
+        usr.delete(db, {"router_id": router, "name": user["name"]})
+
+        return jsonify({"message": "ok"})
+    except Exception as e:
+        return jsonify({"message": str(e)}), 500
+
+
+def modify_user(db, router, user):
+    try:
+        print(router)
+
+        if user["name"] == "" or user["password"] == "":
+            raise Exception("User void or password void")
+
+        if usr.get(db, {"router_id": router, "name": user["name"]}) is None:
+            raise Exception(f"This user {user['name']} doesn't exists")
+
+        if usr.get(db, {"router_id": router, "name": user["new_name"]}) is not None:
+            raise Exception(f"This new username {user['new_name']} already exists")
+
+        networking.change_user(router, user["name"], user["new_name"], user["password"])
+        usr.modify(
+            db, {"router_id": router, "name": user["name"]}, name=user["new_name"]
+        )
+
+        return jsonify({"message": "ok"})
     except Exception as e:
         return jsonify({"message": str(e)}), 500

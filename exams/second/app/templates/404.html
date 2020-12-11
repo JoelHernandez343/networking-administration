@@ -16,10 +16,13 @@
 
 {% block main %}
 
-<h1 class="text-4xl font-semibold text-dark-blue mb-2">Index</h1>
-<p class="font-normal text-gray-600 leading-relaxed">
-  Este es el index. Este es un servicio que corre en un servidor desarrollado y
-  construido con Flask!
-</p>
-
+<div class="flex flex-col items-center justify-center">
+  <h1 class="text-9xl font-semibold text-dark-blue mb-2">404</h1>
+  <img
+    class="m-5 w-1/4"
+    src="{{ url_for('static', filename='images/ufo.png') }}"
+  />
+</div>
+{{ e }}
+<!-- prettier-ignore -->
 {% endblock %}

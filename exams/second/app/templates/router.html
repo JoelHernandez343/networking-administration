@@ -114,6 +114,75 @@
 <h2 class="text-2xl font-semibold text-dark-blue my-2">Usuarios</h2>
 <!-- prettier-ignore -->
 {% for u in router.users %} {{ user_item.user_item(u, loop.index) }} {% endfor %}
+
+<div
+  class="py-2 bg-gray-50 my-2 border border-gray-300 rounded-md hidden"
+  id="add_user_section"
+>
+  <h2 class="px-4 text-xl font-semibold text-dark-blue my-2">
+    Agregar usuario
+  </h2>
+  <div class="px-4 py-4 grid grid-cols-4 gap-x-4">
+    <div class="text-sm font-medium text-blue">Nombre de usuario</div>
+    <div class="text-sm text-gray-900 mt-0 col-span-3">
+      <input
+        id="input_add_user_name"
+        type="text"
+        class="w-full input py-1 px-2"
+      />
+    </div>
+  </div>
+  <div class="px-4 py-4 grid grid-cols-4 gap-x-4">
+    <div class="text-sm font-medium text-blue">Contraseña</div>
+    <div class="text-sm text-gray-900 mt-0 col-span-3">
+      <input
+        id="input_add_user_pass"
+        type="password"
+        class="w-full input py-1 px-2"
+      />
+    </div>
+  </div>
+</div>
+
+<h3 id="log_add_user" class="font-bold text-lg text-red-600 mt-2 mb-2"></h3>
+<div class="flex flex-row-reverse my-2">
+  <button
+    id="bttn_add_user"
+    class="mx-2 flex items-center bg-gray-200 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    AGREGAR
+  </button>
+
+  <button
+    id="bttn_add_use_save"
+    class="hidden mx-2 flex items-center bg-gray-200 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/diskette.png') }}"
+      alt=""
+    />
+    GUARDAR
+  </button>
+
+  <button
+    id="bttn_cancel_add_user"
+    class="hidden mx-2 flex items-center bg-red-100 text-gray-900 rounded-full font-semibold py-2 px-4 shadow-md hover:bg-red-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-2 w-2 mr-2"
+      src="{{ url_for('static', filename='images/cancel.png') }}"
+      alt=""
+    />
+    CANCELAR
+  </button>
+
+  <div id="loading_add_user" class="flex items-center hidden">
+    <span class="font-medium mx-2">CARGANDO</span>
+    <span class="spin inline-block">⌛</span>
+  </div>
+</div>
+
 <!-- prettier-ignore -->
 {% endblock %}
 

@@ -31,16 +31,38 @@ def render_router(router):
     r = rt.get(app.session, router)
 
     if r is None:
-        return jsonify({"message": f"This router {router} doesnt exist"}), 404
+        return (
+            render_template(
+                "404.html", routes=app.routes, e=f"This router {router} doesnt exist"
+            ),
+            404,
+        )
 
     return render_template("router.html", routes=app.routes, router=r)
 
 
 def render_interface_router(router, interface):
-    print(router, interface)
+
+    r = rt.get(app.session, router)
+
+    if r is None:
+        return (
+            render_template(
+                "404.html", routes=app.routes, e=f"This router {router} doesnt exist"
+            ),
+            404,
+        )
+
     i = intf.get(app.session, {"router_id": router, "name": interface})
 
     if i is None:
-        return jsonify({"message": f"This router {router} doesnt exist"}), 404
+        return (
+            render_template(
+                "404.html",
+                routes=app.routes,
+                e=f"This interface {interface} doesnt exists in {router}",
+            ),
+            404,
+        )
 
     return render_template("interface.html", routes=app.routes, interface=i)

@@ -18,9 +18,20 @@
 
 <h1 class="text-4xl font-semibold text-dark-blue mb-2">Topología</h1>
 <p class="font-normal text-gray-600 leading-relaxed">
-  Este es el index. Este es un servicio que corre en un servidor desarrollado y
-  construido con Flask!
+  Aquí podemos observa la topología de la red
 </p>
+
+<div>
+  <div id="image_not_found" class="hidden">
+    <h1 class="text-5xl font-semibold text-dark-blue my-6">
+      Topología no encontrada :(
+    </h1>
+  </div>
+  <div id="image_found" class="hidden">
+    <img src="{{ url_for('static', filename='images/network.png') }}" alt="" />
+  </div>
+</div>
+
 <h3 id="log" class="font-bold text-lg text-red-600 mt-2 mb-2"></h3>
 <button
   id="remote_script"

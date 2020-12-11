@@ -20,7 +20,9 @@ def visit_it(source, current, db):
     log("Visited")
 
     if source is not None:
-        shared.topology.add_edge(source["name"], shared.hostname)
+        shared.topology.add_edge(
+            source["name"], shared.hostname, get_label(source["ip"], source["mask"])
+        )
         log(f"Added edge ({shared.hostname}, {source['name']})")
 
     if shared.hostname in shared.visited:
@@ -40,7 +42,11 @@ def visit_it(source, current, db):
 
         shared.pending.append(
             {
-                "source": {"ip": hop["source"], "name": shared.hostname},
+                "source": {
+                    "ip": hop["source"],
+                    "mask": hop["mask"],
+                    "name": shared.hostname,
+                },
                 "dest": hop["hop"],
             }
         )
@@ -48,3 +54,10 @@ def visit_it(source, current, db):
     log("Queued hops")
 
     session.logout()
+
+
+def get_label(ip, mask):
+    network = net.net_from_ip_mask(ip, mask)
+    prefix = net.get_prefix(mask)
+
+    return f"{network}/{prefix}"

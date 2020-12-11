@@ -1,9 +1,11 @@
 from pexpect.exceptions import TIMEOUT
+from networking.graph import Graph
 
 from networking import visit, shared, net, configuration
 
 
 def discover_topology(db):
+    shared.topology = Graph()
     shared.pending = []
     shared.visited = []
 
@@ -13,7 +15,7 @@ def discover_topology(db):
         print("Visiting to " + device["dest"])
         visit.visit_it(device["source"], device["dest"], db)
 
-    # shared.topology.render()
+    shared.topology.render()
 
 
 def add_user(ip, new_user, new_password):
@@ -36,7 +38,7 @@ def change_user(ip, user, new_user, new_password):
         session.logout()
         return
 
-    if user != new_user and net.check_conn(session, new_user):
+    if user != new_user and net.check_user(session, new_user):
         print(f"The new user {new_user} already exists.")
         session.logout()
         return

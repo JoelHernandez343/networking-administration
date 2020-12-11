@@ -1,45 +1,78 @@
-document.addEventListener('DOMContentLoaded', _ => {
-  let button = document.getElementById('remote_script');
-  let log = document.getElementById('log');
+let discoverBttn, log;
 
-  function toggleButton(isActive) {
-    let ready = 'hover:bg-blue-500 bg-blue'.split(/\s/);
-    let loading = 'pr-2 bg-gray-500'.split(/\s/);
+function getNodes() {
+  return {
+    discoverBttn: document.getElementById('remote_script'),
+    log: document.getElementById('log'),
+  };
+}
 
-    let content = document.getElementById('remote_script_content');
-    let clock = document.getElementById('remote_script_loading');
+function toggleButton(isActive) {
+  let ready = 'hover:bg-blue-500 bg-blue'.split(/\s/);
+  let loading = 'pr-2 bg-gray-500'.split(/\s/);
 
-    clock.classList.toggle('hidden', isActive);
-    clock.classList.toggle('inline-block', !isActive);
+  let content = document.getElementById('remote_script_content');
+  let clock = document.getElementById('remote_script_loading');
 
-    content.innerHTML = isActive
-      ? 'ACTUALIZAR TOPOLOGÍA Y BASE DE DATOS'
-      : 'CARGANDO...';
+  clock.classList.toggle('hidden', isActive);
+  clock.classList.toggle('inline-block', !isActive);
 
-    ready.forEach(c => button.classList.toggle(c, isActive));
-    loading.forEach(c => button.classList.toggle(c, !isActive));
-  }
+  content.innerHTML = isActive
+    ? 'ACTUALIZAR TOPOLOGÍA Y BASE DE DATOS'
+    : 'CARGANDO...';
 
-  button.addEventListener('click', () => {
-    console.log('Hello world!');
+  ready.forEach(c => discoverBttn.classList.toggle(c, isActive));
+  loading.forEach(c => discoverBttn.classList.toggle(c, !isActive));
+}
 
-    toggleButton(false);
-    button.disabled = true;
+function discover() {
+  toggleButton(false);
+  discoverBttn.disabled = true;
 
-    fetch(`${window.origin}/requests/discover_topology`, {
-      method: 'POST',
-    }).then(async res => {
-      json = await res.json();
+  fetch(`${window.origin}/requests/discover_topology`, {
+    method: 'POST',
+  }).then(async res => {
+    json = await res.json();
 
-      toggleButton(true);
-      button.disabled = false;
+    toggleButton(true);
+    discoverBttn.disabled = false;
 
-      if (!res.ok) {
-        json['status'] = res.status;
-        log.innerHTML = JSON.stringify(json);
-      } else {
-        log.innerHTML = 'Base de datos completada';
-      }
-    });
+    if (!res.ok) {
+      json['status'] = res.status;
+      log.innerHTML = JSON.stringify(json);
+    } else {
+      log.innerHTML = 'Base de datos completada';
+    }
+
+    toggleImage();
   });
+}
+
+async function testTopologyImage() {
+  return (
+    await fetch(`${window.origin}/static/images/network.png`, {
+      method: 'GET',
+    })
+  ).ok;
+}
+
+async function toggleImage() {
+  isFound = await testTopologyImage();
+
+  let imageSection = document.getElementById('image_found');
+  let notImageSection = document.getElementById('image_not_found');
+
+  imageSection.classList.toggle('hidden', !isFound);
+  notImageSection.classList.toggle('hidden', isFound);
+
+  if (isFound) {
+    imageSection.querySelector('img').src = '/static/images/network.png';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  ({ discoverBttn, log } = getNodes());
+
+  discoverBttn.addEventListener('click', discover);
+  toggleImage();
 });
