@@ -16,10 +16,94 @@
 
 {% block main %}
 
-<h1 class="text-4xl font-semibold text-dark-blue mb-2">Index</h1>
-<p class="font-normal text-gray-600 leading-relaxed">
+<h1 class="text-4xl font-semibold text-dark-blue mb-2">Inicio</h1>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
   Este es el index. Este es un servicio que corre en un servidor desarrollado y
   construido con Flask!
 </p>
+<h2 class="text-2xl font-semibold text-dark-blue mb-2">Objetivo</h2>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  Realizar un programa en Python que funcione sobre el framework flask o
+  equivalente para realizar operaciones de administración en redes básicas.
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  Implementar una base de datos de SQLAlchemy o equivalente sobre el framework
+  elegido para almacenar información sobre la red de computadoras.
+</p>
+<h2 class="text-2xl font-semibold text-dark-blue mb-2">Topología</h2>
+<img src="{{ url_for('static', filename='images/topology.png') }}" class="" />
 
+<h2 class="text-2xl font-semibold text-dark-blue mb-2">Requisitos</h2>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  Se deberá de implementar un programa en Python que usando el framework flask,
+  SQLAlchemy y demás elementos permita mediante una interfaz de REST realizar
+  las operaciones siguientes de administración de redes:
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  Al arrancar obtenga de forma automática la dirección de la compuerta por
+  defecto
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  La primera vez que se ejecute deberá de tener una liga URL que se encargue de
+  explorar la topología de red y recabar la información necesaria para los
+  siguientes puntos.
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  Una vez realizada la operación anterior, agregarán una URL donde se pueda
+  desplegar de forma gráfica la topología de red incluyendo subredes y la
+  información de las direcciones IP y máscara.
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  Al realizarse la operación 2 agregar accesos a URLs para poder acceder a datos
+  de cada dispositivo donde se puede observar la información de los enrutadores
+  de la red incluyendo:
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  - ID (IP más alta de sus enlaces).
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">- Hostname</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">- Marca</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  - Versión del sistema operativo
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  - Número de interfaces activas
+</p>
+
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  Y guardarse en la base de datos.
+</p>
+
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  Agregar accesos a URLs para cada una de las interfaces activas de los
+  enrutadores encontrados, agrupados como subdirecciones del punto anterior,
+  guardarlo en la base de datos presentando la siguiente información:
+</p>
+
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  - IP y máscara asignada.
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  - IP e ID de enrutador o subred a la que está conectado.
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  - Después de la operación 2, agregarán dos opciones:
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  - Una opción para modificar datos en la base de datos de los enrutadores y las
+  interfaces activas de cada uno de ellos.
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  - Una para consultar, agregar, modificar o eliminar usuarios de los
+  enrutadores que deberán de guardarse en la base de datos.
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  Para calificar el examen, se pedirá que se desactiven algunas conexiones entre
+  los enrutadores y el programa deberá de reconocer la topología resultante. Se
+  revisará que los enrutadores tengan únicamente la configuración indicada en el
+  documento.
+</p>
+<p class="font-normal text-gray-600 leading-relaxed py-2">
+  El programa no deberá de tener ninguna dirección IP preconfigurada.
+</p>
 {% endblock %}
