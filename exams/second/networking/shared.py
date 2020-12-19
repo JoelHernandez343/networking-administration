@@ -8,6 +8,7 @@ visited = []
 
 hostname = ""
 pending = []
+lan = 0
 
 
 def log(message):

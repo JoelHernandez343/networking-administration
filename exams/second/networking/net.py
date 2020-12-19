@@ -210,7 +210,7 @@ def get_information(session):
     lines.pop(0)
     lines.pop()
 
-    return {"os": lines[0], "brand": lines[1]}
+    return {"os": lines[0].split()[7], "brand": lines[1]}
 
 
 def check_interface(session, interface):

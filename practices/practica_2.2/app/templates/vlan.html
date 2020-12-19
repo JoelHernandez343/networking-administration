@@ -1,0 +1,57 @@
+<!-- prettier-ignore -->
+{% extends "public_template.html" %}
+
+<!-- prettier-ignore -->
+{% import "macros/switch_item.html" as switch_item %}
+
+<!-- prettier-ignore -->
+{% block title %}{{ vlan.name }}{% endblock %}
+
+
+{% block main %}
+<div class="flex justify-start mb-2">
+  <a
+    href="/"
+    class="flex items-center bg-blue-100 rounded-lg py-2 px-4 hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/left-arrow.png') }}"
+      alt=""
+    />
+    <span class="text-sm text-blue-800 font-semibold">REGRESAR</span>
+  </a>
+</div>
+<div class="">
+  <h1 class="text-4xl font-bold text-dark-blue mb-2">{{ vlan.name }}</h1>
+
+  <h4 class="text-base font-semibold text-gray-700">
+    {{ 'Vlan número '~vlan.number }}
+  </h4>
+
+  <div class="py-4 grid sm:grid-cols-2 md:grid-cols-3">
+    <div>
+      <h3 class="text-base font-medium text-gray-700">Default gateway</h3>
+      <h4 class="text-sm font-normal text-gray-500">{{ vlan.gateway }}</h4>
+    </div>
+    <div>
+      <h3 class="text-base font-medium text-gray-700">
+        Identificador de subred
+      </h3>
+      <h4 class="text-sm font-normal text-gray-500">{{ vlan.net }}</h4>
+    </div>
+    <div>
+      <h3 class="text-base font-medium text-gray-700">Máscara de subred</h3>
+      <h4 class="text-sm font-normal text-gray-500">{{ vlan.mask }}</h4>
+    </div>
+  </div>
+</div>
+
+<h3 class="text-base font-medium text-gray-700">Interfaces</h3>
+
+<div>
+  <!-- prettier-ignore -->
+  {% for s in switches %} {{ switch_item.switch_item(s, loop.index) }} {% endfor %}
+</div>
+
+{% endblock %}

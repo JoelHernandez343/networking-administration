@@ -1,0 +1,63 @@
+<!-- prettier-ignore -->
+{% extends "public_template.html" %}
+
+<!-- prettier-ignore -->
+{% import "macros/vlan_item.html" as vlan_item %}
+
+<!-- prettier-ignore -->
+{% import "macros/cartel.html" as cartel %}
+
+<!-- prettier-ignore -->
+{% block title %}Home{% endblock %}
+
+
+{% block main %}
+<div class="flex justify-end">
+  <button
+    id="bttn_update"
+    class="flex items-center bg-green-100 rounded-lg py-2 px-4 hover:bg-green-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/refresh.png') }}"
+      alt=""
+    />
+    <span class="text-sm text-green-800 font-semibold">ACTUALIZAR</span>
+  </button>
+</div>
+<h1 class="text-4xl font-bold text-dark-blue mb-2">Vlans</h1>
+<p class="font-medium text-gray-500 leading-relaxed py-2 mb-2">
+  Aquí se muestra la lista de las VLAN que están configuradas en los switches de
+  capa 3 y el router. Si requiere actualizar, puede dar click en el botón de
+  actualización de arriba.
+</p>
+<div class="flex flex-wrap" style="flex-basis: 760px">
+  <!-- prettier-ignore -->
+  {% for v in vlans %} {{ vlan_item.vlan_item(v, loop.index) }} {% endfor %}
+</div>
+
+<!-- prettier-ignore -->
+{{ cartel.cartel('', '', 'message', '') }}
+
+<div class="flex justify-end">
+  <a
+    href="/add"
+    class="cursor-pointer flex items-center bg-blue-100 rounded-lg py-2 px-4 hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/plus.png') }}"
+      alt=""
+    />
+    <span class="text-sm text-blue-800 font-semibold">AGREGAR VLAN</span>
+  </a>
+</div>
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block custom_scripts %}
+<script
+  src="{{ url_for('static', filename='js/index.js') }} "
+  type="module"
+></script>
+{% endblock %}

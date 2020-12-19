@@ -1,0 +1,52 @@
+<!-- prettier-ignore -->
+{% macro vlan_item(vlan={}, index=0) -%}
+
+<div
+  class="shadow rounded-md w-56 mr-4 mb-4 flex"
+  id="vlan_{{ vlan['number'] }}"
+>
+  <a
+    class="bg-white hover:bg-gray-300 transition ease-in-out duration-150 cursor-pointer flex-grow"
+  >
+    <div class="">
+      <div class="px-6 py-6 bg-white bg-opacity-80">
+        <h1 class="text-2xl font-semibold text-dark-blue">{{ vlan.name }}</h1>
+        <h4 class="text-sm font-normal text-gray-500">
+          {{ 'Vlan número '~vlan.number }}
+        </h4>
+      </div>
+      <div class="bg-gray-100 bg-opacity-80 px-6 py-4">
+        <div class="mb-4">
+          <h3 class="text-base font-medium text-gray-700">Default gateway</h3>
+          <h4 class="text-sm font-normal text-gray-500">{{ vlan.gateway }}</h4>
+        </div>
+        <div class="mb-4">
+          <h3 class="text-base font-medium text-gray-700">
+            Identificador de subred
+          </h3>
+          <h4 class="text-sm font-normal text-gray-500">{{ vlan.net }}</h4>
+        </div>
+        <div>
+          <h3 class="text-base font-medium text-gray-700">Máscara de subred</h3>
+          <h4 class="text-sm font-normal text-gray-500">{{ vlan.mask }}</h4>
+        </div>
+        <div class="flex justify-end mt-4">
+          <button
+            id="delete_vlan_{{ vlan['number'] }}"
+            class="flex items-center bg-red-100 rounded-lg py-2 px-4 hover:bg-red-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2"
+          >
+            <img
+              class="inline-block h-3 w-3 mr-2"
+              src="{{ url_for('static', filename='images/recycle-bin.png') }}"
+              alt=""
+            />
+            <span class="text-sm text-red-800 font-semibold">ELIMINAR</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- prettier-ignore -->
+{%- endmacro %}

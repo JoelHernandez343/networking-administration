@@ -1,0 +1,35 @@
+<!-- prettier-ignore -->
+{% macro interface_item(interface={}, ip='', index=0) -%}
+
+<div
+  id="int_{{ ip }}_{{ interface['name'] }}"
+  class="cursor-pointer px-5 py-1 inline-flex rounded-full bg-gray-200 text-gray-700 mr-4 mb-2 relative"
+>
+  <p class="text-xs">{{ interface.name }}</p>
+  <!-- prettier-ignore -->
+  {% if interface['vlan'] != 1 %}
+  <span
+    class="absolute px-2 text-xs leading-5 font-semibold rounded-full bg-yellow-200 text-gray-500 right-0 -mr-3 -mt-2"
+  >
+    {{interface['vlan']}}
+  </span>
+  <!-- prettier-ignore -->
+  {% endif %}
+</div>
+
+<!-- prettier-ignore -->
+{%- endmacro %}
+
+<!-- prettier-ignore -->
+{% macro switch_item(switch={}, index=0) -%}
+
+<div class="py-2">
+  <h4 class="text-sm font-normal text-gray-500 mb-2">Switch {{ switch.ip }}</h4>
+  <div class="flex flex-wrap">
+    <!-- prettier-ignore -->
+    {% for i in switch['interfaces'] %} {{ interface_item(i, index, loop.index) }} {% endfor %}
+  </div>
+</div>
+
+<!-- prettier-ignore -->
+{%- endmacro %}

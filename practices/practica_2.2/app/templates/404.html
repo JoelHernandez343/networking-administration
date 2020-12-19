@@ -1,0 +1,27 @@
+<!-- prettier-ignore -->
+{% extends "public_template.html" %}
+
+<!-- prettier-ignore -->
+{% block title %}Error 404{% endblock %}
+
+{% block main %}
+
+<div class="flex flex-col items-center justify-center">
+  <h1 class="text-9xl font-semibold text-dark-blue mb-2">404</h1>
+  <img
+    class="m-5 w-1/4"
+    src="{{ url_for('static', filename='images/ufo.png') }}"
+  />
+  <div class="flex justify-start mb-2">
+    <a
+      href="/"
+      class="flex items-center bg-blue-100 rounded-lg py-2 px-4 hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+    >
+      <span class="text-sm text-blue-800 font-semibold">INICIO</span>
+    </a>
+  </div>
+</div>
+{{ e }}
+
+<!-- prettier-ignore -->
+{% endblock %}

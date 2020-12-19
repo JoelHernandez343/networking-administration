@@ -8,6 +8,7 @@ def discover_topology(db):
     shared.topology = Graph()
     shared.pending = []
     shared.visited = []
+    shared.lan = 1
 
     shared.pending.append({"source": None, "dest": net.get_default_gateway()})
 

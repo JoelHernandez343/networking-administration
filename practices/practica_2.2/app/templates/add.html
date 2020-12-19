@@ -1,0 +1,104 @@
+<!-- prettier-ignore -->
+{% extends "public_template.html" %}
+
+<!-- prettier-ignore -->
+{% import "macros/switch_item.html" as switch_item %}
+
+<!-- prettier-ignore -->
+{% import "macros/cartel.html" as cartel %}
+
+<!-- prettier-ignore -->
+{% block title %}Agregar VLAN{% endblock %}
+
+
+{% block main %}
+<div class="flex justify-start mb-2">
+  <a
+    href="/"
+    class="flex items-center bg-blue-100 rounded-lg py-2 px-4 hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/left-arrow.png') }}"
+      alt=""
+    />
+    <span class="text-sm text-blue-800 font-semibold">REGRESAR</span>
+  </a>
+</div>
+<h1 class="text-4xl font-bold text-dark-blue mb-2">Agregar VLAN</h1>
+<p class="font-medium text-gray-500 leading-relaxed py-2 mb-2">
+  Aquí puede agregar una nueva VLAN, agregando su información y configurando sus
+  interfaces
+</p>
+
+<div class="grid md:grid-cols-2">
+  <div>
+    <h3 class="text-base font-medium text-gray-700 mt-2 mb-1">Número</h3>
+    <input
+      id="input_vlan_number"
+      type="text"
+      class="w-full md:w-3/4 input py-1 px-2"
+    />
+  </div>
+  <div>
+    <h3 class="text-base font-medium text-gray-700 mt-2 mb-1">Nombre</h3>
+    <input
+      id="input_vlan_name"
+      type="text"
+      class="w-full md:w-3/4 input py-1 px-2"
+    />
+  </div>
+  <div>
+    <h3 class="text-base font-medium text-gray-700 mt-2 mb-1">Gateway</h3>
+    <input
+      id="input_vlan_gateway"
+      type="text"
+      class="w-full md:w-3/4 input py-1 px-2"
+    />
+  </div>
+  <div>
+    <h3 class="text-base font-medium text-gray-700 mt-2 mb-1">Máscara</h3>
+    <input
+      id="input_vlan_mask"
+      type="text"
+      class="w-full md:w-3/4 input py-1 px-2"
+    />
+  </div>
+</div>
+
+<h3 class="text-base font-medium text-gray-700 mt-2 mb-1">Interfaces</h3>
+
+<div>
+  <!-- prettier-ignore -->
+  {% for s in switches %} {{ switch_item.switch_item(s, s.ip) }} {% endfor %}
+</div>
+
+{{ cartel.cartel('Advertencia', 'Estás seleccionando interfaces con VLAN ya
+asignadas. Crear la VLAN con esta configuración cambiará la asignación de las
+interfaces.', 'warning', 'warn') }}
+
+<!-- prettier-ignore -->
+{{ cartel.cartel('', '', 'message', '') }}
+
+<div class="flex justify-end my-2">
+  <button
+    id="bttn_add"
+    class="flex items-center bg-green-100 rounded-lg py-2 px-4 hover:bg-green-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/plus.png') }}"
+      alt=""
+    />
+    <span class="text-sm text-green-800 font-semibold">AGREGAR VLAN</span>
+  </button>
+</div>
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block custom_scripts %}
+<script
+  src="{{ url_for('static', filename='js/add.js') }}"
+  type="module"
+></script>
+{% endblock %}

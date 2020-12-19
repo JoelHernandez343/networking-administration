@@ -37,6 +37,14 @@ def visit_it(source, current, db):
 
     for hop in net.get_next_hops(session, connections):
         if not net.check_conn(session, hop["hop"]):
+            shared.topology.add_edge(
+                shared.hostname,
+                f"{get_label(hop['source'], hop['mask'])}",
+                "",
+            )
+
+            shared.lan += 1
+
             log(f"Without connection: {hop['hop']}")
             continue
 
