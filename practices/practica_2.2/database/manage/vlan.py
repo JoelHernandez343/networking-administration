@@ -28,7 +28,7 @@ def add(db, vlan):
         name=vlan["name"],
         gateway=vlan["gateway"],
         mask=vlan["mask"],
-        net=network.net_from_ip_mask(vlan["gateway"], vlan["mask"]),
+        net=vlan["net"],
     )
 
     db.add(v)

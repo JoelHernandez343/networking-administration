@@ -63,6 +63,8 @@ def add_vlan(db, v):
     if vlan.get(db, v["number"]) is not None:
         return jsonify({"message": f"This vlan {v['number']} already exits!"}), 400
 
+    v["gateway"] = networking.net.get_first_ip(v["net"], v["mask"])
+
     networking.set_vlan(v, {"name": app.user, "password": app.password})
     vlan.add(db, v)
 

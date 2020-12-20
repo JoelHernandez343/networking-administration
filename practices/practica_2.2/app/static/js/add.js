@@ -50,13 +50,13 @@ const setInterfacesEvents = switches => {
 const addVlan = async () => {
   const number = getId('input_vlan_number');
   const name = getId('input_vlan_name');
-  const gateway = getId('input_vlan_gateway');
+  const net = getId('input_vlan_network');
   const mask = getId('input_vlan_mask');
 
   let vlan = {
     number: number.value,
     name: name.value,
-    gateway: gateway.value,
+    net: net.value,
     mask: mask.value,
     interfaces: selected.map(e => ({
       switch: e['s'],

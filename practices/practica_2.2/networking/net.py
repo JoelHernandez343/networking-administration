@@ -4,7 +4,7 @@ import struct
 
 def clear_output(before):
     lines = before.decode("UTF-8").replace("\r", "").split("\n")
-    return [l for l in lines if l != ""]
+    return [line for line in lines if line != ""]
 
 
 def get_hostname(before):
@@ -21,3 +21,9 @@ def ntoa(ip):
 
 def net_from_ip_mask(ip, mask):
     return ntoa(aton(ip) & aton(mask))
+
+
+def get_first_ip(network, mask):
+    net = aton(net_from_ip_mask(network, mask))
+
+    return ntoa(net + 1)
