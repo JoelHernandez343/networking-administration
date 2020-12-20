@@ -70,7 +70,7 @@
 
 <div>
   <!-- prettier-ignore -->
-  {% for s in switches %} {{ switch_item.switch_item(s, s.ip) }} {% endfor %}
+  {% for s in switches %} {{ switch_item.switch_item(s) }} {% endfor %}
 </div>
 
 {{ cartel.cartel('Advertencia', 'Estás seleccionando interfaces con VLAN ya
@@ -85,12 +85,18 @@ interfaces.', 'warning', 'warn') }}
     id="bttn_add"
     class="flex items-center bg-green-100 rounded-lg py-2 px-4 hover:bg-green-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
   >
-    <img
-      class="inline-block h-3 w-3 mr-2"
-      src="{{ url_for('static', filename='images/plus.png') }}"
-      alt=""
-    />
-    <span class="text-sm text-green-800 font-semibold">AGREGAR VLAN</span>
+    <div class="content-section flex items-center">
+      <img
+        class="inline-block h-3 w-3 mr-2"
+        src="{{ url_for('static', filename='images/plus.png') }}"
+        alt=""
+      />
+      <span class="text-sm text-green-800 font-semibold">AGREGAR VLAN</span>
+    </div>
+    <div class="loading-section flex items-center hidden">
+      <span class="text-sm text-green-800 font-semibold mx-2">CARGANDO</span>
+      <span class="text-sm spin inline-block">⌛</span>
+    </div>
   </button>
 </div>
 {% endblock %}

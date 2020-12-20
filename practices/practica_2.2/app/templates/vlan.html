@@ -51,7 +51,7 @@
 
 <div>
   <!-- prettier-ignore -->
-  {% for s in switches %} {{ switch_item.switch_item(s, loop.index) }} {% endfor %}
+  {% for s in switches %} {{ switch_item.switch_item(s, False) }} {% endfor %}
 </div>
 
 {% endblock %}

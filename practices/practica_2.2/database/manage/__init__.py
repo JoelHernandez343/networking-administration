@@ -1,6 +1,9 @@
 from database import models
 from database.database import engine
 
+from database.manage import interface
+from database.manage import vlan
+
 
 def drop_db():
     models.Base.metadata.drop_all(bind=engine)

@@ -90,6 +90,8 @@ def get_vlans_router(session, vlans):
 
     current_vlan = None
 
+    new_vlans = []
+
     for line in lines:
         fields = line.strip().split()
 
@@ -108,8 +110,12 @@ def get_vlans_router(session, vlans):
 
             j = get_index_vlan(current_vlan, vlans)
 
-            vlans[j]["gateway"] = fields[2]
-            vlans[j]["mask"] = fields[3]
-            vlans[j]["net"] = net.net_from_ip_mask(fields[2], fields[3])
+            new_vlan = vlans[j]
 
-    return vlans
+            new_vlan["gateway"] = fields[2]
+            new_vlan["mask"] = fields[3]
+            new_vlan["net"] = net.net_from_ip_mask(fields[2], fields[3])
+
+            new_vlans.append(new_vlan)
+
+    return new_vlans

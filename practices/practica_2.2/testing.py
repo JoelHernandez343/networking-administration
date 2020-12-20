@@ -47,8 +47,8 @@ vlan30 = {
     ],
 }
 
-networking.set_vlan(vlan10, user, delete=False)
-networking.set_vlan(vlan20, user, delete=False)
-networking.set_vlan(vlan30, user, delete=False)
-# table = networking.get_vlans(user)
-# print(json.dumps(table, indent=2))
+# networking.set_vlan(vlan10, user, delete=False)
+# networking.set_vlan(vlan20, user, delete=False)
+# networking.set_vlan(vlan30, user, delete=False)
+table = networking.get_vlans(user)
+print(json.dumps(table, indent=2))

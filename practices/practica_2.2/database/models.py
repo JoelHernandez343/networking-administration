@@ -26,7 +26,7 @@ class Vlan(Base, DictMixIn):
 class Interface(Base, DictMixIn):
     __tablename__ = "Interfaces"
 
-    vlan_number = Column(Integer, primary_key=True, index=True)
+    vlan_number = Column(Integer, ForeignKey("Vlans.number"), index=True)
     switch = Column(String, primary_key=True, index=True)
     name = Column(String, primary_key=True, index=True)
 

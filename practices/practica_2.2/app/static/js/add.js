@@ -1,41 +1,19 @@
+import { getId, makeRequest } from './modules/helper.js';
+import { loadingButton } from './modules/button.js';
 import { log } from './modules/log.js';
-import { getId } from './modules/helper.js';
 
 let switches = [];
 let selected = [];
 
-const getSwitches = async () => [
-  {
-    ip: '192.168.1.11',
-    interfaces: [
-      { name: 'FastEthernet1/6', vlan: 1 },
-      { name: 'FastEthernet1/7', vlan: 1 },
-      { name: 'FastEthernet1/8', vlan: 1 },
-      { name: 'FastEthernet1/9', vlan: 10 },
-      { name: 'FastEthernet1/10', vlan: 1 },
-      { name: 'FastEthernet1/11', vlan: 20 },
-      { name: 'FastEthernet1/12', vlan: 1 },
-      { name: 'FastEthernet1/13', vlan: 30 },
-      { name: 'FastEthernet1/14', vlan: 20 },
-      { name: 'FastEthernet1/15', vlan: 10 },
-    ],
-  },
-  {
-    ip: '192.168.1.12',
-    interfaces: [
-      { name: 'FastEthernet1/6', vlan: 1 },
-      { name: 'FastEthernet1/7', vlan: 1 },
-      { name: 'FastEthernet1/8', vlan: 1 },
-      { name: 'FastEthernet1/9', vlan: 1 },
-      { name: 'FastEthernet1/10', vlan: 1 },
-      { name: 'FastEthernet1/11', vlan: 1 },
-      { name: 'FastEthernet1/12', vlan: 1 },
-      { name: 'FastEthernet1/13', vlan: 1 },
-      { name: 'FastEthernet1/14', vlan: 1 },
-      { name: 'FastEthernet1/15', vlan: 1 },
-    ],
-  },
-];
+const getSwitches = async () => {
+  let [json, code] = await makeRequest({ type: 'switches' }, 'request');
+
+  if (code !== 200) {
+    log(json['message'], 'error', `Error ${code}`);
+  }
+
+  return code !== 200 ? [] : json;
+};
 
 const toggleWarning = () => {
   let isClean = true;
@@ -69,18 +47,43 @@ const setInterfacesEvents = switches => {
   }
 };
 
-const addVlan = () => {
-  const number = getId('input_vlan_number').value;
-  const name = getId('input_vlan_name').value;
-  const gateway = getId('input_vlan_gateway').value;
-  const mask = getId('input_vlan_mask').value;
+const addVlan = async () => {
+  const number = getId('input_vlan_number');
+  const name = getId('input_vlan_name');
+  const gateway = getId('input_vlan_gateway');
+  const mask = getId('input_vlan_mask');
 
-  console.table([number, name, gateway, mask, selected]);
+  let vlan = {
+    number: number.value,
+    name: name.value,
+    gateway: gateway.value,
+    mask: mask.value,
+    interfaces: selected.map(e => ({
+      switch: e['s'],
+      name: e['i'],
+      vlan_number: e['v'],
+    })),
+  };
+
+  let [json, code] = await makeRequest({ type: 'add', vlan }, 'request');
+
+  if (code !== 200) {
+    log(json['message'], 'error', `Error ${code}`);
+  } else {
+    log(
+      'Se agregó de forma exitosa la VLAN. Regresa a inicio para verla',
+      'ok'
+    );
+
+    window.location = '/';
+  }
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
   switches = await getSwitches();
 
   setInterfacesEvents(switches);
-  getId('bttn_add').addEventListener('click', addVlan);
+  getId('bttn_add').addEventListener('click', () =>
+    loadingButton('bttn_add', addVlan)
+  );
 });

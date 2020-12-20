@@ -30,19 +30,36 @@
           <h3 class="text-base font-medium text-gray-700">Máscara de subred</h3>
           <h4 class="text-sm font-normal text-gray-500">{{ vlan.mask }}</h4>
         </div>
+        <!-- prettier-ignore -->
+        {% if vlan.number != 1 %}
+
         <div class="flex justify-end mt-4">
           <button
             id="delete_vlan_{{ vlan['number'] }}"
             class="flex items-center bg-red-100 rounded-lg py-2 px-4 hover:bg-red-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2"
           >
-            <img
-              class="inline-block h-3 w-3 mr-2"
-              src="{{ url_for('static', filename='images/recycle-bin.png') }}"
-              alt=""
-            />
-            <span class="text-sm text-red-800 font-semibold">ELIMINAR</span>
+            <div class="content-section flex items-center">
+              <img
+                class="inline-block h-3 w-3 mr-2"
+                src="{{ url_for('static', filename='images/recycle-bin.png') }}"
+                alt=""
+              />
+              <span class="text-sm text-red-800 font-semibold">ELIMINAR</span>
+            </div>
+            <div class="loading-section flex items-center hidden">
+              <span class="text-sm text-red-800 font-semibold mx-2"
+                >CARGANDO</span
+              >
+              <span class="text-sm spin inline-block">⌛</span>
+            </div>
           </button>
         </div>
+        <!-- prettier-ignore -->
+        {% else %}
+        <div class="mt-4" style="height: 36px"></div>
+
+        <!-- prettier-ignore -->
+        {% endif %}
       </div>
     </div>
   </a>

@@ -15,14 +15,20 @@
 <div class="flex justify-end">
   <button
     id="bttn_update"
-    class="flex items-center bg-green-100 rounded-lg py-2 px-4 hover:bg-green-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
+    class="bg-green-100 rounded-lg py-2 px-4 hover:bg-green-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
   >
-    <img
-      class="inline-block h-3 w-3 mr-2"
-      src="{{ url_for('static', filename='images/refresh.png') }}"
-      alt=""
-    />
-    <span class="text-sm text-green-800 font-semibold">ACTUALIZAR</span>
+    <div class="content-section flex items-center">
+      <img
+        class="inline-block h-3 w-3 mr-2"
+        src="{{ url_for('static', filename='images/refresh.png') }}"
+        alt=""
+      />
+      <span class="text-sm text-green-800 font-semibold">ACTUALIZAR</span>
+    </div>
+    <div class="loading-section flex items-center hidden">
+      <span class="text-sm text-green-800 font-semibold mx-2">CARGANDO</span>
+      <span class="text-sm spin inline-block">⌛</span>
+    </div>
   </button>
 </div>
 <h1 class="text-4xl font-bold text-dark-blue mb-2">Vlans</h1>
@@ -39,7 +45,7 @@
 <!-- prettier-ignore -->
 {{ cartel.cartel('', '', 'message', '') }}
 
-<div class="flex justify-end">
+<div class="flex justify-end" id="add_button_section">
   <a
     href="/add"
     class="cursor-pointer flex items-center bg-blue-100 rounded-lg py-2 px-4 hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
