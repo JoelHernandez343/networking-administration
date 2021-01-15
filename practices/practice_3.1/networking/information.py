@@ -3,7 +3,7 @@ from networking.snmp import snmp_query
 community = "ro_4CM1"
 
 
-def get_sys_info(ip, credentials):
+def get_sys_info(ip):
     info = {}
 
     info["sysDescr"] = snmp_query(ip, community, "1.3.6.1.2.1.1.1.0")
