@@ -49,11 +49,16 @@ def get_if_info(ip, n):
 
 
 def get_interfaces(ip):
+    print(ip)
+
     interfaces = []
 
-    number = int(snmp_query(ip, community, oids.INTNUMBER_OID)) - 1
+    number = int(snmp_query(ip, community, oids.INTNUMBER_OID)) + 1
 
     for i in range(number):
-        interfaces.append(get_if_info(ip, i + 1))
+        interface = get_if_info(ip, i + 1)
+
+        if interface["ifDescr"] != "Null0" and interface["ifDescr"] != "":
+            interfaces.append(interface)
 
     return interfaces

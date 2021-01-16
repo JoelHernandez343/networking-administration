@@ -1,15 +1,19 @@
 def status(status):
 
-    status = int(str(status))
+    try:
+        status = int(str(status))
 
-    if status == 1:
-        return "up"
-    if status == 2:
-        return "down"
-    if status == 3:
-        return "testing"
+        if status == 1:
+            return "up"
+        if status == 2:
+            return "down"
+        if status == 3:
+            return "testing"
 
-    return "unknown"
+        return "unknown"
+
+    except:
+        return "unknown"
 
 
 def mac(raw_str):

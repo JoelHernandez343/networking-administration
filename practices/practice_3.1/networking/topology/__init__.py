@@ -49,6 +49,8 @@ def visit_it(source, current, db, user):
     common.visited.append(common.hostname)
     connections = ssh.information.get_connections(session)
 
+    print(connections)
+
     set_data_to_db(db, current, session)
 
     for hop in ssh.information.get_next_hops(session, connections):
@@ -84,7 +86,7 @@ def set_data_to_db(db, hostname, session):
     sys_info = snmp.information.get_sys_info(hostname)
     interfaces = ssh.information.get_all_connections(session)
 
-    for si in snmp.information.get_interfaces(interfaces[0]["ip"]):
+    for si in snmp.information.get_interfaces(interfaces[1]["ip"]):
         i = [
             index for (index, d) in enumerate(interfaces) if d["name"] == si["ifDescr"]
         ][0]

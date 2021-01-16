@@ -22,6 +22,9 @@ def get_connections(session):
             if active:
                 table.append(interface)
 
+            if fields[1] == "Loopback0":
+                continue
+
             interface = {}
             active = True
 
