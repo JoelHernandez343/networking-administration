@@ -4,6 +4,8 @@ from .graph import Graph
 from .. import ssh, snmp
 from ..ssh import tools
 
+from database.manage import router as rt
+
 
 def discover(db, user):
     common.topology = Graph()
@@ -46,8 +48,8 @@ def visit_it(source, current, db, user):
 
     common.visited.append(common.hostname)
     connections = ssh.information.get_connections(session)
-    sys_info = snmp.information.get_sys_info(current)
-    # Aquí va el agregado a la BD
+
+    set_data_to_db(db, current, session)
 
     for hop in ssh.information.get_next_hops(session, connections):
         if not ssh.tools.check_conn(session, hop["hop"]):
@@ -76,6 +78,24 @@ def visit_it(source, current, db, user):
     tools.log("Queued hops")
 
     session.logout()
+
+
+def set_data_to_db(db, hostname, session):
+    sys_info = snmp.information.get_sys_info(hostname)
+    interfaces = ssh.information.get_all_connections(session)
+
+    for si in snmp.information.get_interfaces(interfaces[0]["ip"]):
+        i = [
+            index for (index, d) in enumerate(interfaces) if d["name"] == si["ifDescr"]
+        ][0]
+        interfaces[i]["ifMtu"] = si["ifMtu"]
+        interfaces[i]["ifSpeed"] = si["ifSpeed"]
+        interfaces[i]["ifPhysAddress"] = si["ifPhysAddress"]
+        interfaces[i]["ifAdminStatus"] = si["ifAdminStatus"]
+        interfaces[i]["ifOperStatus"] = si["ifOperStatus"]
+        interfaces[i]["mibIndex"] = si["mibIndex"]
+
+    rt.add(db, sys_info, interfaces)
 
 
 def get_label(ip, mask):

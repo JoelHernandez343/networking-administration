@@ -67,3 +67,11 @@ def get_prefix(mask):
         wildcard >>= 1
 
     return 32 - counter
+
+
+def translate_to_flask(interface_name):
+    return interface_name.replace("/", "-")
+
+
+def translate_to_router(interface_name):
+    return interface_name.replace("-", "/")

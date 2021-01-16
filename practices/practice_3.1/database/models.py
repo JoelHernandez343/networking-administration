@@ -14,7 +14,7 @@ class DictMixIn:
 class Router(Base, DictMixIn):
     __tablename__ = "Routers"
 
-    index = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    ip_max = Column(String, primary_key=True, index=True)
     hostname = Column(String)
     sys_desc = Column(String)
     sys_contact = Column(String)
@@ -38,8 +38,8 @@ class Interface(Base, DictMixIn):
     if_mtu = Column(String)
     if_speed = Column(String)
     if_physaddress = Column(String)
-    if_adminsystem = Column(String)
     if_adminstatus = Column(String)
     if_operstatus = Column(String)
+    mib_index = Column(String)
 
     router = relationship("Router", backref="Interface")
