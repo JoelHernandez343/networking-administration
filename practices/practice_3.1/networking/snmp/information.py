@@ -37,6 +37,7 @@ def get_if_info(ip, n):
         "ifOperStatus": convert.status(
             snmp_query(ip, community, f"{oids.INTERFACE_OID}.8.{n}")
         ),
+        "mibIndex": n,
     }
 
 
