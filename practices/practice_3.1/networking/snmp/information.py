@@ -31,7 +31,7 @@ def get_if_info(ip, n):
         "ifPhysAddress": convert.mac(
             snmp_query(ip, community, f"{oids.INTERFACE_OID}.6.{n}")
         ),
-        "ifAdminSystem": convert.status(
+        "ifAdminStatus": convert.status(
             snmp_query(ip, community, f"{oids.INTERFACE_OID}.7.{n}")
         ),
         "ifOperStatus": convert.status(
