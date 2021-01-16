@@ -1,19 +1,16 @@
-from . import snmp_query, convert, oids
+from . import convert, oids
+from .tools import snmp_query
 
 community = "ro_4CM1"
 
 
 def get_sys_info(ip):
-    info = {
+    return {
         "sysDescr": snmp_query(ip, community, oids.DESCR_OID),
         "sysContact": snmp_query(ip, community, oids.CONTACT_OID),
         "sysName": snmp_query(ip, community, oids.HOSTNAME_OID),
         "sysLocation": snmp_query(ip, community, oids.LOCATION_OID),
     }
-
-    info["hostname"] = info["sysName"].split(".")[0]
-
-    return info
 
 
 def get_if_inout(ip, n):
