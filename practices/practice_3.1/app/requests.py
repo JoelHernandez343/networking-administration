@@ -2,6 +2,8 @@ from flask import request, jsonify
 from pexpect.pxssh import ExceptionPxssh
 from app import app
 
+from database.manage import recreate_db
+
 from networking import ssh, topology
 
 
@@ -53,6 +55,8 @@ def set_login(db, user):
 
 def update_all(db, user):
     try:
+        recreate_db()
+
         topology.discover(db, user)
 
         return jsonify({"message": "ok"})

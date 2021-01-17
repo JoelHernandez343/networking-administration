@@ -1,0 +1,79 @@
+<!-- prettier-ignore -->
+{% extends "public_template.html" %}
+
+<!-- prettier-ignore -->
+{% import "macros/cartel.html" as cartel %}
+
+<!-- prettier-ignore -->
+{% block title %}{{ interface.name }}{% endblock %}
+
+
+{% block main %}
+<div class="flex justify-start mb-2">
+  <a
+    href="/routers/{{ interface.router_id }}"
+    class="flex items-center bg-blue-100 rounded-lg py-2 px-4 hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/left-arrow.png') }}"
+      alt=""
+    />
+    <span class="text-sm text-blue-800 font-semibold">REGRESAR</span>
+  </a>
+</div>
+<div class="">
+  <h1 class="text-4xl font-bold text-dark-blue mb-2">{{ interface.name }}</h1>
+
+  <h4 class="text-base font-semibold text-gray-700">
+    {{ 'Del router '~interface.router_id }}
+  </h4>
+
+  <div class="py-4">
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Dirección IP</h3>
+      <h4 class="text-sm font-normal text-gray-500">{{ interface.ip }}</h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Máscara de subred</h3>
+      <h4 class="text-sm font-normal text-gray-500">{{ interface.mask }}</h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Red</h3>
+      <h4 class="text-sm font-normal text-gray-500">{{ interface.net }}</h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">MTU</h3>
+      <h4 class="text-sm font-normal text-gray-500">{{ interface.if_mtu }}</h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Velocidad</h3>
+      <h4 class="text-sm font-normal text-gray-500">
+        {{ interface.if_speed }}
+      </h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Dirección física</h3>
+      <h4 class="text-sm font-normal text-gray-500">
+        {{ interface.if_physaddress }}
+      </h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Estado administrativo</h3>
+      <h4 class="text-sm font-normal text-gray-500">
+        {{ interface.if_adminstatus }}
+      </h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Estado operacional</h3>
+      <h4 class="text-sm font-normal text-gray-500">
+        {{ interface.if_operstatus }}
+      </h4>
+    </div>
+  </div>
+</div>
+
+<!-- prettier-ignore -->
+{{ cartel.cartel('', '', 'message', '') }}
+
+{% endblock %}
