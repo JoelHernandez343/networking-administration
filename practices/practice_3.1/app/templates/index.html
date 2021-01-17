@@ -1,0 +1,66 @@
+<!-- prettier-ignore -->
+{% extends "public_template.html" %}
+
+<!-- prettier-ignore -->
+{% import "macros/cartel.html" as cartel %}
+
+<!-- prettier-ignore -->
+{% import "macros/router_item.html" as router_item %}
+
+<!-- prettier-ignore -->
+{% block title %}Home{% endblock %}
+
+{% block main %}
+<div class="flex justify-end">
+  <button
+    id="bttn_update"
+    class="bg-green-100 rounded-lg py-2 px-4 hover:bg-green-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
+  >
+    <div class="content-section flex items-center">
+      <img
+        class="inline-block h-3 w-3 mr-2"
+        src="{{ url_for('static', filename='images/refresh.png') }}"
+        alt=""
+      />
+      <span class="text-sm text-green-800 font-semibold">ACTUALIZAR</span>
+    </div>
+    <div class="loading-section flex items-center hidden">
+      <span class="text-sm text-green-800 font-semibold mx-2">CARGANDO</span>
+      <span class="text-sm spin inline-block">⌛</span>
+    </div>
+  </button>
+</div>
+<h1 class="text-4xl font-bold text-dark-blue mb-2">Routers</h1>
+<p class="font-medium text-gray-500 leading-relaxed py-2 mb-2">
+  Aquí se muestra la topología de la red y la lista de routers que se encuentran
+  en esta. Si requiere actualizar, puede dar click en el botón de actualización
+  de arriba.
+</p>
+
+<div>
+  <div id="image_not_found" class="hidden">
+    <h1 class="text-5xl font-semibold text-dark-blue my-6">
+      Topología no encontrada :(
+    </h1>
+  </div>
+  <div id="image_found" class="hidden">
+    <img src="{{ url_for('static', filename='images/network.png') }}" alt="" />
+  </div>
+</div>
+
+<div class="flex flex-wrap" style="flex-basis: 760px">
+  <!-- prettier-ignore -->
+  {% for r in routers %} {{ router_item.router_item(r, loop.index) }} {% endfor %}
+</div>
+
+<!-- prettier-ignore -->
+{{ cartel.cartel('', '', 'message', '') }}
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block custom_scripts %}
+<script
+  src="{{ url_for('static', filename='js/index.js') }} "
+  type="module"
+></script>
+{% endblock %}

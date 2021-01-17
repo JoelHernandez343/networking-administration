@@ -1,0 +1,15 @@
+<!-- prettier-ignore -->
+{% macro interface_item(interface={}, index=0) -%}
+
+<a
+  class="{% if index % 2 != 0 %} bg-white {% else %} bg-gray-50 {% endif %} x-4 py-4 cursor-pointer hover:bg-gray-100 transition ease-in-out duration-150 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:px-6"
+  href="/routers/{{ interface.router_id }}/{{ interface.name }}"
+>
+  <div class="text-sm font-medium text-blue">{{ interface.name }}</div>
+  <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3 px-2">
+    {{ interface.ip }}
+  </div>
+</a>
+
+<!-- prettier-ignore -->
+{%- endmacro %}

@@ -1,0 +1,149 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins/Poppins-Thin.ttf');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins/Poppins-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins/Poppins-Regular.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins/Poppins-Medium.ttf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins/Poppins-SemiBold.ttf');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins/Poppins-Bold.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins/Poppins-ExtraBold.ttf');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins/Poppins-Black.ttf');
+  font-weight: 900;
+}
+
+.poppins {
+  font-family: 'Poppins';
+}
+
+.spin {
+  animation: spin 2s linear infinite;
+}
+
+.text-blue {
+  color: #0069ff;
+}
+
+.text-dark-blue {
+  color: #031b4e;
+}
+
+.bg-blue {
+  background-color: #0069ff;
+}
+
+.bg-dark-blue {
+  background-color: #031b4e;
+}
+
+.arrow {
+  transform: rotate(0deg);
+  transition: all 0.4s ease-in-out;
+}
+
+.arrow-rotate {
+  transform: rotate(90deg);
+  transition: all 0.4s ease-in-out;
+}
+
+.expansion-closed {
+  height: 0px;
+  transition: all 0.4s cubic-bezier(0, 1.06, 0.74, 0.98);
+  overflow: hidden;
+}
+
+.expansion-opened {
+  transition: all 0.4s cubic-bezier(0, 1.06, 0.74, 0.98);
+}
+
+.aux {
+  transition: all 0.4s cubic-bezier(0, 1.06, 0.74, 0.98);
+}
+
+input {
+  border-width: 1px;
+}
+
+.no-input {
+  border-color: rgba(249, 250, 251, 1);
+}
+
+.input {
+  border-color: rgba(209, 213, 219, 1);
+}
+
+.input:focus {
+  outline-color: rgba(59, 130, 246, 0.5);
+}
+
+::selection {
+  background-color: #accef7;
+}
+
+.fade-in {
+  animation: fade-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes fade-in {
+  0% {
+    transform: rotateX(70deg);
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0deg);
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fade-out 0.55s cubic-bezier(0.6, -0.28, 0.735, 0.045) both;
+}
+
+@keyframes fade-out {
+  0% {
+    transform: rotateX(0deg);
+    transform-origin: top;
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(70deg);
+    transform-origin: top;
+    opacity: 0;
+  }
+}

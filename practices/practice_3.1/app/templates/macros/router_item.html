@@ -1,0 +1,55 @@
+<!-- prettier-ignore -->
+{% macro router_item(router={}, index=0) -%}
+
+<div class="shadow rounded-md w-80 mr-4 mb-4 flex">
+  <a
+    class="bg-white hover:bg-gray-300 transition ease-in-out duration-150 cursor-pointer flex-grow"
+    href="/routers/{{ router.ip_max }}"
+  >
+    <div class="">
+      <div class="px-6 py-6 bg-white bg-opacity-80">
+        <h1 class="text-2xl font-semibold text-dark-blue">
+          {{ router.hostname }}
+        </h1>
+        <h4 class="text-sm font-normal text-gray-500">
+          {{ 'Router '~router.ip_max }}
+        </h4>
+      </div>
+      <div class="bg-gray-100 bg-opacity-80 px-6 py-4">
+        <div class="mb-4">
+          <h3 class="text-base font-medium text-gray-700">Descripción</h3>
+          <h4 class="text-xs font-normal text-gray-500">
+            {{ router.sys_desc }}
+          </h4>
+        </div>
+        <div class="mb-4">
+          <h3 class="text-base font-medium text-gray-700">
+            Información de contacto
+          </h3>
+          <h4 class="text-xs font-normal text-gray-500">
+            {{ router.sys_contact }}
+          </h4>
+        </div>
+        <div>
+          <h3 class="text-base font-medium text-gray-700">
+            Nombre del sistema
+          </h3>
+          <h4 class="text-xs font-normal text-gray-500">
+            {{ router.sys_name }}
+          </h4>
+        </div>
+        <div>
+          <h3 class="text-base font-medium text-gray-700">Locación</h3>
+          <h4 class="text-xs font-normal text-gray-500">
+            {{ router.sys_location }}
+          </h4>
+        </div>
+
+        <div class="mt-4" style="height: 36px"></div>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- prettier-ignore -->
+{%- endmacro %}

@@ -1,0 +1,13 @@
+<!-- prettier-ignore -->
+{% macro cartel(title='', message='', id='', type='') -%}
+
+<div
+  id="{{ id }}"
+  class="hidden rounded-lg pl-4 pr-2 py-3 my-2 {% if type == 'ok' %} bg-green-100 text-green-700 {% elif type == 'error' %} bg-red-100 text-red-700 {% elif type == 'warn' %} bg-yellow-100 text-yellow-700 {% endif %}"
+>
+  <h3 class="text-base font-medium mb-1">{{ title }}</h3>
+  <p class="text-sm text-gray-600">{{ message }}</p>
+</div>
+
+<!-- prettier-ignore -->
+{%- endmacro %}

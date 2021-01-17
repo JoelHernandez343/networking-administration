@@ -1,0 +1,98 @@
+<!-- prettier-ignore -->
+{% extends "public_template.html" %}
+
+<!-- prettier-ignore -->
+{% import "macros/cartel.html" as cartel %}
+
+<!-- prettier-ignore -->
+{% import "macros/interface_item.html" as interface_item %}
+
+<!-- prettier-ignore -->
+{% block title %}{{ router.name }}{% endblock %}
+
+
+{% block main %}
+<div class="flex justify-start mb-2">
+  <a
+    href="/"
+    class="flex items-center bg-blue-100 rounded-lg py-2 px-4 hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/left-arrow.png') }}"
+      alt=""
+    />
+    <span class="text-sm text-blue-800 font-semibold">REGRESAR</span>
+  </a>
+</div>
+<div class="">
+  <h1 class="text-4xl font-bold text-dark-blue mb-2">{{ router.hostname }}</h1>
+
+  <h4 class="text-base font-semibold text-gray-700">
+    {{ 'Router '~router.ip_max }}
+  </h4>
+
+  <div class="py-4">
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Hostname</h3>
+      <h4 class="text-sm font-normal text-gray-500">
+        <input
+          id="input_hostname_router"
+          type="text"
+          value="{{ router.hostname }}"
+          class="w-full no-input py-1 px-2"
+          disabled
+        />
+      </h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Descripción</h3>
+      <h4 class="text-sm font-normal text-gray-500">{{ router.sys_desc }}</h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">
+        Información de contacto
+      </h3>
+      <h4 class="text-sm font-normal text-gray-500">
+        {{ router.sys_contact }}
+      </h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Nombre del sistema</h3>
+      <h4 class="text-sm font-normal text-gray-500">{{ router.sys_name }}</h4>
+    </div>
+    <div class="mb-2">
+      <h3 class="text-base font-medium text-gray-700">Locación</h3>
+      <h4 class="text-sm font-normal text-gray-500">{{ router.sys_name }}</h4>
+    </div>
+  </div>
+</div>
+
+<!-- prettier-ignore -->
+{{ cartel.cartel('', '', 'message', '') }}
+
+<div class="flex justify-end my-2">
+  <button
+    id="bttn_add"
+    class="flex items-center bg-green-100 rounded-lg py-2 px-4 hover:bg-green-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
+  >
+    <div class="content-section flex items-center">
+      <img
+        class="inline-block h-3 w-3 mr-2"
+        src="{{ url_for('static', filename='images/edit.png') }}"
+        alt=""
+      />
+      <span class="text-sm text-green-800 font-semibold">EDITAR</span>
+    </div>
+    <div class="loading-section flex items-center hidden">
+      <span class="text-sm text-green-800 font-semibold mx-2">CARGANDO</span>
+      <span class="text-sm spin inline-block">⌛</span>
+    </div>
+  </button>
+</div>
+
+<h3 class="text-base font-medium text-gray-700">Interfaces</h3>
+<!-- prettier-ignore -->
+{% for i in router.interfaces %} {{ interface_item.interface_item(i, loop.index) }} {% endfor %}
+
+{% endblock %}

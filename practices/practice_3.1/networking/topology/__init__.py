@@ -49,8 +49,6 @@ def visit_it(source, current, db, user):
     common.visited.append(common.hostname)
     connections = ssh.information.get_connections(session)
 
-    print(connections)
-
     set_data_to_db(db, current, session)
 
     for hop in ssh.information.get_next_hops(session, connections):
