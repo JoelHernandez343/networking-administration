@@ -52,6 +52,7 @@ def add(db, router, interfaces):
         sys_contact=router["sysContact"],
         sys_name=router["sysName"],
         sys_location=router["sysLocation"],
+        accesible_ip=router["accesible_ip"],
     )
 
     db.add(r)
@@ -65,8 +66,10 @@ def modify(db, router_id, hostname=""):
     if router is None:
         return False
 
-    if hostname != "":
-        router.hostname = hostname
+    if hostname == "":
+        raise Exception("Hostname must not be empty")
+
+    router.hostname = hostname
 
     db.add(router)
     db.commit()

@@ -21,6 +21,8 @@ class Router(Base, DictMixIn):
     sys_name = Column(String)
     sys_location = Column(String)
 
+    accesible_ip = Column(String)
+
     interfaces = relationship("Interface", backref="Router", lazy="dynamic")
 
 

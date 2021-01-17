@@ -80,8 +80,11 @@ def visit_it(source, current, db, user):
     session.logout()
 
 
-def set_data_to_db(db, hostname, session):
-    sys_info = snmp.information.get_sys_info(hostname)
+def set_data_to_db(db, current, session):
+
+    sys_info = snmp.information.get_sys_info(current)
+    sys_info["accesible_ip"] = current
+
     interfaces = ssh.information.get_all_connections(session)
 
     for si in snmp.information.get_interfaces(interfaces[1]["ip"]):

@@ -6,13 +6,13 @@ from sqlalchemy.orm import scoped_session
 from database.manage import recreate_db
 from database import SessionLocal, engine
 
-try:
-    os.remove("app/static/images/network.png")
-except OSError:
-    pass
+# try:
+#     os.remove("app/static/images/network.png")
+# except OSError:
+#     pass
 
 
-recreate_db()
+# recreate_db()
 
 app = Flask(__name__)
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0

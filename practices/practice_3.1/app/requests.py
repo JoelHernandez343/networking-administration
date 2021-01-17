@@ -4,7 +4,9 @@ from app import app
 
 from database.manage import recreate_db
 
-from networking import ssh, topology
+from networking import ssh, topology, snmp
+
+from database.manage import router as rt, interface as it
 
 
 @app.route("/request", methods=["POST"])
@@ -19,8 +21,8 @@ def request_information():
         if req["type"] == "updateDb":
             return update_all(app.session, {"name": app.user, "password": app.password})
 
-        # if req["type"] == "vlans":
-        #     return get_all_vlans(app.session)
+        if req["type"] == "changeHostname":
+            return change_hostname(app.session, req["router"])
 
         # if req["type"] == "scan":
         #     return scan(app.session)
@@ -62,4 +64,23 @@ def update_all(db, user):
         return jsonify({"message": "ok"})
 
     except ExceptionPxssh as err:
+        return jsonify({"message": str(err)}), 500
+
+
+def change_hostname(db, router):
+    try:
+        r = rt.get(db, router["id"])
+
+        if r is None:
+            return (
+                jsonify({"message": f"This router {router['id']} doesn't exist."}),
+                404,
+            )
+
+        rt.modify(db, router["id"], router["newHostname"])
+        snmp.configuration.set_hostname(r["accesible_ip"], router["newHostname"])
+
+        return jsonify({"message": "ok"})
+
+    except Exception as err:
         return jsonify({"message": str(err)}), 500

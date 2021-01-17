@@ -24,8 +24,8 @@ const updateDataBase = async () => {
 async function toggleImage() {
   let isFound = await testTopologyImage();
 
-  let imageSection = document.getElementById('image_found');
-  let notImageSection = document.getElementById('image_not_found');
+  let imageSection = getId('image_found');
+  let notImageSection = getId('image_not_found');
 
   imageSection.classList.toggle('hidden', !isFound);
   notImageSection.classList.toggle('hidden', isFound);

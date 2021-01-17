@@ -26,10 +26,12 @@
   </a>
 </div>
 <div class="">
-  <h1 class="text-4xl font-bold text-dark-blue mb-2">{{ router.hostname }}</h1>
+  <h1 class="text-4xl font-bold text-dark-blue mb-2" id="router_hostname">
+    {{ router.hostname }}
+  </h1>
 
   <h4 class="text-base font-semibold text-gray-700">
-    {{ 'Router '~router.ip_max }}
+    Router <span id="router_id">{{ router.ip_max }}</span>
   </h4>
 
   <div class="py-4">
@@ -71,10 +73,21 @@
 <!-- prettier-ignore -->
 {{ cartel.cartel('', '', 'message', '') }}
 
-<div class="flex justify-end my-2">
+<div class="flex flex-row-reverse">
   <button
-    id="bttn_add"
-    class="flex items-center bg-green-100 rounded-lg py-2 px-4 hover:bg-green-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
+    id="bttn_edit"
+    class="ml-2 flex items-center bg-blue-100 rounded-lg py-2 px-4 hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-3 w-3 mr-2"
+      src="{{ url_for('static', filename='images/edit.png') }}"
+      alt=""
+    />
+    <span class="text-sm text-blue-800 font-semibold">EDITAR</span>
+  </button>
+  <button
+    id="bttn_save"
+    class="hidden ml-2 flex items-center bg-green-100 rounded-lg py-2 px-4 hover:bg-green-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
   >
     <div class="content-section flex items-center">
       <img
@@ -82,12 +95,23 @@
         src="{{ url_for('static', filename='images/edit.png') }}"
         alt=""
       />
-      <span class="text-sm text-green-800 font-semibold">EDITAR</span>
+      <span class="text-sm text-green-800 font-semibold">GUARDAR</span>
     </div>
     <div class="loading-section flex items-center hidden">
       <span class="text-sm text-green-800 font-semibold mx-2">CARGANDO</span>
       <span class="text-sm spin inline-block">⌛</span>
     </div>
+  </button>
+  <button
+    id="bttn_cancel"
+    class="hidden ml-2 flex items-center bg-red-100 rounded-lg py-2 px-4 hover:bg-red-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2"
+  >
+    <img
+      class="inline-block h-2 w-2 mr-2"
+      src="{{ url_for('static', filename='images/cancel.png') }}"
+      alt=""
+    />
+    <span class="text-sm text-red-800 font-semibold">CANCELAR</span>
   </button>
 </div>
 
@@ -95,4 +119,12 @@
 <!-- prettier-ignore -->
 {% for i in router.interfaces %} {{ interface_item.interface_item(i, loop.index) }} {% endfor %}
 
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block custom_scripts %}
+<script
+  src="{{ url_for('static', filename='js/router.js') }}"
+  type="module"
+></script>
 {% endblock %}
