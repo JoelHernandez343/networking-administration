@@ -27,18 +27,6 @@ def request_information():
         if req["type"] == "registers":
             return get_registers(app.session, req["interface"])
 
-        # if req["type"] == "scan":
-        #     return scan(app.session)
-
-        # if req["type"] == "switches":
-        #     return get_all_switches(app.session)
-
-        # if req["type"] == "add":
-        #     return add_vlan(app.session, req["vlan"])
-
-        # if req["type"] == "delete":
-        #     return delete_vlan(app.session, req["vlan_number"])
-
     return jsonify({"message": "This petition doesn't have a response"}), 400
 
 
