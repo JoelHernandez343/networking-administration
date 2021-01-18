@@ -6,10 +6,10 @@ from sqlalchemy.orm import scoped_session
 from database.manage import recreate_db
 from database import SessionLocal
 
-# try:
-#     os.remove("app/static/images/network.png")
-# except OSError:
-#     pass
+try:
+    os.remove("app/static/images/network.png")
+except OSError:
+    pass
 
 
 app = Flask(__name__)
@@ -21,7 +21,7 @@ app.password = None
 
 app.interface_threads = []
 
-# recreate_db(app)
+recreate_db(app)
 
 
 @app.teardown_appcontext

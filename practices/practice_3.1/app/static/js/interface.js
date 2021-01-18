@@ -126,16 +126,16 @@ const checkLostPackages = async percentage => {
       }
     }
 
-    await wait(1000);
+    await wait(500);
   }
+
+  console.log('Sali!');
 
   finished = true;
 };
 
-const lauchChecker = () => {
+const lauchChecker = async () => {
   stopped = true;
-
-  while (!finished) {}
 
   try {
     let new_percentage = parseFloat(getId('input_percentage').value);
