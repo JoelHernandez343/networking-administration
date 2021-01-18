@@ -59,6 +59,8 @@ def add(db, router, interfaces):
     db.add_all(interface.create_multiple(ip_max, interfaces))
     db.commit()
 
+    return get(db, ip_max)
+
 
 def modify(db, router_id, hostname=""):
     router = db.query(models.Router).get(router_id)

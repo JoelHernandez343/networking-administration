@@ -21,4 +21,9 @@ const makeRequest = async (req, path) => {
   }
 };
 
-export { getId, queryD, queryAll, makeRequest };
+const wait = async miliseconds =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => resolve(), miliseconds);
+  });
+
+export { getId, queryD, queryAll, makeRequest, wait };

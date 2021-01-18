@@ -1,4 +1,11 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    ForeignKey,
+    Boolean,
+    ForeignKeyConstraint,
+)
 from sqlalchemy.orm import relationship
 
 from . import Base
@@ -44,4 +51,31 @@ class Interface(Base, DictMixIn):
     if_operstatus = Column(String)
     mib_index = Column(String)
 
+    register_thread_index = Column(Integer)
+
     router = relationship("Router", backref="Interface")
+    registers = relationship("Register", backref="Interface", lazy="dynamic")
+
+
+class Register(Base, DictMixIn):
+    __tablename__ = "Registers"
+
+    router_id = Column(String, primary_key=True, index=True)
+    interface_id = Column(String, primary_key=True, index=True)
+    date = Column(String, primary_key=True)
+
+    if_inoctets = Column(String)
+    if_outoctets = Column(String)
+    if_inucastpkts = Column(String)
+    if_outucastpkts = Column(String)
+
+    __table_args__ = (
+        ForeignKeyConstraint(
+            [router_id, interface_id], [Interface.router_id, Interface.name]
+        ),
+        {},
+    )
+
+    interface = relationship(
+        "Interface", backref="Register", foreign_keys=[router_id, interface_id]
+    )

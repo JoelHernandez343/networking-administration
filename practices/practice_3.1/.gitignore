@@ -2,4 +2,5 @@ practice3_1.db
 env/
 **/__pycache__/
 test.py
-network.png
+**/network.png
+app/static/js/chart.js-2.9.4/

@@ -6,6 +6,11 @@ from ..ssh import tools
 
 from database.manage import router as rt
 
+from app import app
+
+from stpthread import StoppableThread
+from ..interface import tracking
+
 
 def discover(db, user):
     common.topology = Graph()
@@ -88,6 +93,7 @@ def set_data_to_db(db, current, session):
     interfaces = ssh.information.get_all_connections(session)
 
     for si in snmp.information.get_interfaces(interfaces[1]["ip"]):
+
         i = [
             index for (index, d) in enumerate(interfaces) if d["name"] == si["ifDescr"]
         ][0]
@@ -98,7 +104,19 @@ def set_data_to_db(db, current, session):
         interfaces[i]["ifOperStatus"] = si["ifOperStatus"]
         interfaces[i]["mibIndex"] = si["mibIndex"]
 
-    rt.add(db, sys_info, interfaces)
+    r = rt.add(db, sys_info, interfaces)
+
+    for i in r["interfaces"]:
+        thread_index = len(app.interface_threads)
+        app.interface_threads.append(
+            StoppableThread(
+                interface={"router_id": i["router_id"], "name": i["name"]},
+                target=tracking,
+            )
+        )
+
+        # {"router_id": i["router_id"], "name": i["name"]}
+        app.interface_threads[thread_index].start()
 
 
 def get_label(ip, mask):

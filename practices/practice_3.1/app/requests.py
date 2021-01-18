@@ -6,7 +6,7 @@ from database.manage import recreate_db
 
 from networking import ssh, topology, snmp
 
-from database.manage import router as rt, interface as it
+from database.manage import router as rt, interface as it, register as rg
 
 
 @app.route("/request", methods=["POST"])
@@ -23,6 +23,9 @@ def request_information():
 
         if req["type"] == "changeHostname":
             return change_hostname(app.session, req["router"])
+
+        if req["type"] == "registers":
+            return get_registers(app.session, req["interface"])
 
         # if req["type"] == "scan":
         #     return scan(app.session)
@@ -57,13 +60,13 @@ def set_login(db, user):
 
 def update_all(db, user):
     try:
-        recreate_db()
+        recreate_db(app)
 
         topology.discover(db, user)
 
         return jsonify({"message": "ok"})
 
-    except ExceptionPxssh as err:
+    except Exception as err:
         return jsonify({"message": str(err)}), 500
 
 
@@ -81,6 +84,17 @@ def change_hostname(db, router):
         snmp.configuration.set_hostname(r["accesible_ip"], router["newHostname"])
 
         return jsonify({"message": "ok"})
+
+    except Exception as err:
+        return jsonify({"message": str(err)}), 500
+
+
+def get_registers(db, interface):
+    try:
+
+        registers = rg.get_all(db, interface)
+
+        return jsonify({"registers": registers})
 
     except Exception as err:
         return jsonify({"message": str(err)}), 500

@@ -23,10 +23,12 @@
   </a>
 </div>
 <div class="">
-  <h1 class="text-4xl font-bold text-dark-blue mb-2">{{ interface.name }}</h1>
+  <h1 class="text-4xl font-bold text-dark-blue mb-2">
+    <span id="interface_name">{{ interface.name }}</span>
+  </h1>
 
   <h4 class="text-base font-semibold text-gray-700">
-    {{ 'Del router '~interface.router_id }}
+    Del router <span id="router_id">{{ interface.router_id }}</span>
   </h4>
 
   <div class="py-4">
@@ -73,7 +75,20 @@
   </div>
 </div>
 
+<div id="graph_octects"></div>
+<div id="graph_packages"></div>
+
 <!-- prettier-ignore -->
 {{ cartel.cartel('', '', 'message', '') }}
+
+{% endblock %}
+
+
+{% block custom_scripts %}
+<script src="{{ url_for('static', filename='js/chart.js-2.9.4/package/dist/Chart.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='js/interface.js') }}"
+  type="module"
+></script>
 
 {% endblock %}
