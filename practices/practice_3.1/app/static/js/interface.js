@@ -16,18 +16,32 @@ const getRegisters = async () => {
   return code !== 200 ? [] : json['registers'];
 };
 
+const graph = (p, datasets, labels) => {
+  while (p.lastChild) {
+    p.removeChild(p.lastChild);
+  }
+
+  let canvas = document.createElement('canvas');
+  p.appendChild(canvas);
+
+  let ctx = canvas.getContext('2d');
+  let chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets,
+    },
+  });
+
+  p.style.height = '400px';
+};
+
 const updateRegisters = async () => {
   let parentOctects = getId('graph_octects');
   let parentPackages = getId('graph_packages');
 
   while (true) {
     console.log('Updating');
-
-    [parentOctects, parentPackages].forEach(p => {
-      while (p.lastChild) {
-        p.removeChild(p.lastChild);
-      }
-    });
 
     let registers = await getRegisters();
 
@@ -37,14 +51,9 @@ const updateRegisters = async () => {
       return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     });
 
-    let canvas = document.createElement('canvas');
-    parentOctects.appendChild(canvas);
-
-    let ctx = canvas.getContext('2d');
-    let chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: domain,
+    [
+      {
+        parent: parentOctects,
         datasets: [
           {
             data: registers.map(r => r['if_inoctets']),
@@ -62,18 +71,8 @@ const updateRegisters = async () => {
           },
         ],
       },
-    });
-
-    parentOctects.style.height = '400px';
-
-    canvas = document.createElement('canvas');
-    parentPackages.appendChild(canvas);
-
-    ctx = canvas.getContext('2d');
-    chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: domain,
+      {
+        parent: parentPackages,
         datasets: [
           {
             data: registers.map(r => r['if_inucastpkts']),
@@ -91,9 +90,7 @@ const updateRegisters = async () => {
           },
         ],
       },
-    });
-
-    parentPackages.style.height = '400px';
+    ].forEach(e => graph(e['parent'], e['datasets'], domain));
 
     await wait(60000);
   }
