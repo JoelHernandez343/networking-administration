@@ -1,12 +1,12 @@
 from flask import request, jsonify
 from pexpect.pxssh import ExceptionPxssh
+
 from app import app
 
-from database.manage import recreate_db
+from database import models
+from database.manage import recreate_db, router as rt, interface as it, register as rg
 
 from networking import ssh, topology, snmp
-
-from database.manage import router as rt, interface as it, register as rg
 
 
 @app.route("/request", methods=["POST"])
@@ -26,6 +26,14 @@ def request_information():
 
         if req["type"] == "registers":
             return get_registers(app.session, req["interface"])
+
+        if req["type"] == "lostPackages":
+            return check_lost_packages(
+                app.session,
+                req["interface"],
+                req["percentage"],
+                {"name": app.user, "password": app.password},
+            )
 
     return jsonify({"message": "This petition doesn't have a response"}), 400
 
@@ -83,6 +91,38 @@ def get_registers(db, interface):
         registers = rg.get_all(db, interface)
 
         return jsonify({"registers": registers})
+
+    except Exception as err:
+        return jsonify({"message": str(err)}), 500
+
+
+def check_lost_packages(db, interface, percentage, user):
+    try:
+        i_source = it.get(
+            db, {"router_id": interface["router_id"], "name": interface["name"]}
+        )
+
+        next_hop = ssh.information.check_next_connection(i_source, user)
+
+        if next_hop is None:
+            return (
+                jsonify(
+                    {
+                        "message": f"This interface {i_source['name']} of router {i_source['router_id']} doesn't has next hop"
+                    }
+                ),
+                404,
+            )
+
+        i_dest = {}
+        for i in db.query(models.Interface).filter(models.Interface.ip == next_hop):
+            i_dest = i.to_dict()
+
+        is_exceeded, percentage = snmp.information.check_lost_percentage(
+            i_source, i_dest, percentage
+        )
+
+        return jsonify({"isExceeded": is_exceeded, "percentage": percentage})
 
     except Exception as err:
         return jsonify({"message": str(err)}), 500

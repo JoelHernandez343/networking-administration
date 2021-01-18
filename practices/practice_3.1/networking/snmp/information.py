@@ -60,3 +60,19 @@ def get_interfaces(ip):
             interfaces.append(interface)
 
     return interfaces
+
+
+def check_lost_percentage(interface_source, interface_dest, percentage):
+
+    info_dest = get_if_inout(interface_dest["ip"], interface_dest["mib_index"])
+    info_source = get_if_inout(interface_source["ip"], interface_source["mib_index"])
+
+    print(info_dest, info_source)
+
+    lost_packages = int(info_source["ifOutUcastPkts"]) - int(info_dest["ifInUcastPkts"])
+
+    lost_percentage = abs(lost_packages * 100 / int(info_source["ifOutUcastPkts"]))
+
+    print(lost_packages, lost_percentage, percentage, info_source["ifOutUcastPkts"])
+
+    return (lost_percentage >= percentage, lost_percentage)

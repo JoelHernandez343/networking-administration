@@ -115,7 +115,6 @@ def set_data_to_db(db, current, session):
             )
         )
 
-        # {"router_id": i["router_id"], "name": i["name"]}
         app.interface_threads[thread_index].start()
 
 

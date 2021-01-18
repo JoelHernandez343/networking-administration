@@ -78,6 +78,32 @@
 <div id="graph_octects"></div>
 <div id="graph_packages"></div>
 
+<div class="grid">
+  <div>
+    <h3 class="text-base font-medium text-gray-700 mt-2 mb-1">
+      Porcentaje de fallo: <span id="percentage_show">0.0%</span>
+    </h3>
+    <input
+      id="input_percentage"
+      type="text"
+      class="w-full md:w-3/4 input py-1 px-2"
+    />
+  </div>
+  <div class="flex justify-end mb-2">
+    <button
+      class="flex h-9 items-center bg-blue-100 rounded-lg py-2 px-4 hover:bg-blue-200 ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+      id="check_bttn"
+    >
+      <span class="text-sm text-blue-800 font-semibold">CHECAR</span>
+      <img
+        class="inline-block h-3 w-3 ml-2"
+        src="{{ url_for('static', filename='images/right-arrow.png') }}"
+        alt=""
+      />
+    </button>
+  </div>
+</div>
+
 <!-- prettier-ignore -->
 {{ cartel.cartel('', '', 'message', '') }}
 

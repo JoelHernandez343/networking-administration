@@ -35,6 +35,16 @@ def get_hostname(before):
     return clear_output(before)[-1]
 
 
+def get_next_hop(fields):
+    ip = aton(fields["ip"])
+    net = aton(fields["net"])
+
+    if net + 1 == ip:
+        return ntoa(ip + 1)
+    else:
+        return ntoa(ip - 1)
+
+
 def check_conn(session, ip):
     configuration.send_commands(session, ["ping " + ip + " r 3"])
 
@@ -75,3 +85,17 @@ def translate_to_flask(interface_name):
 
 def translate_to_router(interface_name):
     return interface_name.replace("-", "/")
+
+
+def get_max_ip(interfaces):
+    ip_max_n = 0
+    ip_max = None
+    for i in interfaces:
+        if not i["is_active"]:
+            continue
+
+        if ip_max_n < aton(i["ip"]):
+            ip_max_n = aton(i["ip"])
+            ip_max = i["ip"]
+
+    return ip_max

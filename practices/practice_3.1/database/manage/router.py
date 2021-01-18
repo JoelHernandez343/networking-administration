@@ -3,20 +3,6 @@ from . import interface
 from networking.ssh import tools
 
 
-def _get_max_ip(interfaces):
-    ip_max_n = 0
-    ip_max = None
-    for i in interfaces:
-        if not i["is_active"]:
-            continue
-
-        if ip_max_n < tools.aton(i["ip"]):
-            ip_max_n = tools.aton(i["ip"])
-            ip_max = i["ip"]
-
-    return ip_max
-
-
 def get_all(db):
     routers = db.query(models.Router).all()
 
@@ -43,7 +29,7 @@ def get(db, router_id):
 
 
 def add(db, router, interfaces):
-    ip_max = _get_max_ip(interfaces)
+    ip_max = tools.get_max_ip(interfaces)
 
     r = models.Router(
         ip_max=ip_max,

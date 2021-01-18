@@ -1,4 +1,5 @@
 from . import configuration
+from . import connection
 from . import tools
 
 
@@ -41,21 +42,11 @@ def get_connections(session):
     return table
 
 
-def get_next_hop(fields):
-    ip = tools.aton(fields["ip"])
-    net = tools.aton(fields["net"])
-
-    if net + 1 == ip:
-        return tools.ntoa(ip + 1)
-    else:
-        return tools.ntoa(ip - 1)
-
-
 def get_next_hops(session, connections):
     hops = []
 
     for conn in connections:
-        hop = get_next_hop(conn)
+        hop = tools.get_next_hop(conn)
         hops.append({"source": conn["ip"], "hop": hop, "mask": conn["mask"]})
 
     return hops
@@ -98,3 +89,16 @@ def get_all_connections(session):
     table.append(interface)
 
     return table
+
+
+def check_next_connection(interface, user):
+    session = connection.create(interface["ip"], user)
+
+    next_hop = tools.get_next_hop({"ip": interface["ip"], "net": interface["net"]})
+
+    res = None
+    if tools.check_conn(session, next_hop):
+        res = next_hop
+
+    session.close()
+    return res

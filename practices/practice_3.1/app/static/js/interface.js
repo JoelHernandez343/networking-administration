@@ -96,6 +96,62 @@ const updateRegisters = async () => {
   }
 };
 
+let finished = true;
+let stopped = true;
+
+const checkLostPackages = async percentage => {
+  finished = false;
+  stopped = false;
+
+  while (!stopped) {
+    let req = {
+      type: 'lostPackages',
+      interface: {
+        router_id: getId('router_id').innerHTML,
+        name: getId('interface_name').innerHTML,
+      },
+      percentage,
+    };
+
+    let [json, code] = await makeRequest(req, 'request');
+
+    if (code === 200) {
+      getId('percentage_show').innerHTML = `${json['percentage']}%`;
+      if (json['isExceeded']) {
+        log(
+          'Ya excedió el porcentaje establecido!',
+          'warn',
+          'Porcentaje rebasado!'
+        );
+      }
+    }
+
+    await wait(1000);
+  }
+
+  finished = true;
+};
+
+const lauchChecker = () => {
+  stopped = true;
+
+  while (!finished) {}
+
+  try {
+    let new_percentage = parseFloat(getId('input_percentage').value);
+
+    if (new_percentage == '') {
+      log('Porcentaje no puede ser vacio', 'error', 'Error en porcentaje');
+      return;
+    }
+    checkLostPackages(new_percentage);
+  } catch (err) {
+    log(err, 'error', 'Error en porcentaje');
+  }
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
   updateRegisters();
+
+  getId('check_bttn').addEventListener('click', () => lauchChecker());
 });
