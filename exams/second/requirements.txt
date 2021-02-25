@@ -15,7 +15,9 @@ mypy-extensions==0.4.3
 networkx==2.5
 numpy==1.20.1
 pathspec==0.8.1
+pexpect==4.8.0
 Pillow==8.1.0
+ptyprocess==0.7.0
 pycodestyle==2.6.0
 pyflakes==2.2.0
 pyparsing==2.4.7
