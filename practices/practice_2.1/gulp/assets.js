@@ -9,6 +9,6 @@ const copyPoppinsFont = weight => () =>
       'node_modules/fontsource-poppins/files/',
       `poppins-all-${weight}-normal.woff`
     )
-  ).pipe(dest('app/static/fonts/Poppins'));
+  ).pipe(dest('src/app/static/fonts/Poppins'));
 
 exports.copyTasks = poppinsFonts.map(weight => copyPoppinsFont(weight));

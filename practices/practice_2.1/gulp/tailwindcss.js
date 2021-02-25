@@ -7,6 +7,6 @@ const compile = () =>
   src('assets/tailwind.css')
     .pipe(postcss([tailwindcss]))
     .pipe(rename(path => (path.extname = '.generated.css')))
-    .pipe(dest('app/static/css/'));
+    .pipe(dest('src/app/static/css/'));
 
 exports.compileTailwind = compile;
