@@ -1,6 +1,5 @@
-# Configuración automática de SSH por Telnet
-## Práctica 1.2
-### Descripción
+# Configuración automática de SSH por Telnet | Práctica 1.2
+## Descripción
 
 Se creó la siguiente topología de red:
 
@@ -9,7 +8,9 @@ Se creó la siguiente topología de red:
 **NOTAS**
 - Se utilizó el router **c7200**
 
-#### Tabla posible de configuración
+## Configuración
+
+### Tabla de configuración de direcciones
 
 (Las interfaces pueden variar)
 
@@ -19,7 +20,7 @@ Se creó la siguiente topología de red:
     <th>Dispositivos</th>
     <th>Interfaz</th>
     <th>IP</th>
-    <th>PREFIX</th>
+    <th>Prefijo</th>
   </tr>
 </thead>
 <tbody>
@@ -67,5 +68,35 @@ Se creó la siguiente topología de red:
     <td>192.168.122.134</td>
     <td>30</td>
   </tr>
+  <tr>
+    <td rowspan="1">Python</td>
+    <td>Et0</td>
+    <td>192.168.122.100</td>
+    <td>26</td>
+  </tr>
+  <tr>
+    <td rowspan="1">PC2</td>
+    <td>Et0</td>
+    <td>192.168.122.50</td>
+    <td>26</td>
+  </tr>
 </tbody>
 </table>
+
+### Configuración individual de cada dispositivo
+
+- [R1](./docs/configuration/r1.md)
+- [R2](./docs/configuration/r2.md)
+- [R3](./docs/configuration/r3.md)
+- [R4](./docs/configuration/r4.md)
+
+## Uso
+
+Usando Python 3:
+```bash
+python configure_ssh.py
+```
+
+Salida:
+
+![output](./docs/images/output.jpg)
