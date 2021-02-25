@@ -7,7 +7,7 @@ python3 -m venv env
 source env/bin/activate
 ```
 
-Se instalan los paquetes via npm:
+Se instalan los paquetes via npm (require conexión a internet):
 
 ```bash
 npm install
