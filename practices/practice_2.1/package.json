@@ -1,0 +1,22 @@
+{
+  "name": "practice_2.1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gulp": "gulp -f gulp",
+    "start": "flask run --host=0.0.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^9.0.0",
+    "gulp-rename": "^2.0.0"
+  },
+  "dependencies": {
+    "fontsource-poppins": "^4.0.0",
+    "tailwindcss": "^2.0.3"
+  }
+}
