@@ -3,4 +3,7 @@ env/
 **/__pycache__/
 test.py
 **/network.png
-app/static/js/chart.js-2.9.4/
+src/app/static/js/chart.js-2.9.4/
+node_modules
+tailwind.generated.css
+**/app/static/fonts/*
