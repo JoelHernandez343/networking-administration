@@ -1,6 +1,8 @@
 # Configuración automática de SSH por Telnet | Práctica 1.2
 ## Descripción
 
+Desarrollar un programa en Python que sobreescriba la configuración de SSH mediante Telnet.
+
 Se creó la siguiente topología de red:
 
 ![topology](./docs/images/topology.jpg)
