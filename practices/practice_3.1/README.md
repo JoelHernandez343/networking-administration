@@ -235,40 +235,38 @@ Ingresamos nuestras credenciales ssh previamente configuradas:
 
 ![execution 03](./docs/images/ex03.png)
 
-Nos mostrará una pantalla vacía, y procedemos a dar clic en el botón de `actualizar`:
+Nos mostrará una pantalla sin una topología que mostrar, y procedemos a dar clic en el botón de `actualizar`:
 
 ![execution 04](./docs/images/ex04.png)
 
-Una vez actualizada la base de datos, nos mostrará una única VLAN, la VLAN 1:
+Una vez actualizada la base de datos, la topología y la lista de routers que se encuentran en la red:
 
 ![execution 05](./docs/images/ex05.png)
 
-Consultamos los datos de la VLAN1:
-
 ![execution 06](./docs/images/ex06.png)
 
-Regresamos al inicio y nos movemos a la sección de agregar vlan e ingresamos los datos para agregar la vlan 10 (para agregar interfaces a la VLAN, damos clic sobre el nombre de cada una de las interfaces que queremos agregar):
+Visualizamos la información de un router:
 
 ![execution 07](./docs/images/ex07.png)
 
-La agregamos y finalizando el proceso podremos observar la vlan que acabamos de crear:
+Editamos el nombre de algún router:
 
 ![execution 08](./docs/images/ex08.png)
 
-Observamos la información de dicha VLAN:
+Una vez terminado el proceso, observamos que el nombre, tanto en la base de datos como en la configuración del router se ha actualizado el nombre:
 
 ![execution 09](./docs/images/ex09.png)
 
-Probamos la configuración desde la máquina que esté conectada al switch en alguna interfaz de la VLAN en cuestión:
-
 ![execution 10](./docs/images/ex10.jpg)
 
-Eliminamos la VLAN:
+Vemos la información de alguna interfaz:
 
 ![execution 11](./docs/images/ex11.png)
 
+La gráfica minuto a minuto de los paquetes y octetos salientes y entrantes:
+
 ![execution 12](./docs/images/ex12.png)
 
-Y volvemos a probar la configuración en la pc anterior:
+También podemos monitorear el porcentaje de fallo de algún enlace en específico:
 
-![execution 13](./docs/images/ex13.jpg)
+![execution 13](./docs/images/ex13.png)
