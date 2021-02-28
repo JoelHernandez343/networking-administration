@@ -7,7 +7,7 @@ from database.manage import recreate_db
 from database import SessionLocal
 
 try:
-    os.remove("app/static/images/network.png")
+    os.remove("src/app/static/images/network.png")
 except OSError:
     pass
 
