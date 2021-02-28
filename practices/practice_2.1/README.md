@@ -27,79 +27,6 @@ R4 | Sí | Sí | Sí
 
 ## Configuración
 
-### Tabla de configuración de direcciones
-
-(Las interfaces pueden variar)
-
-<table>
-<thead>
-  <tr>
-    <th>Dispositivos</th>
-    <th>Interfaz</th>
-    <th>IP</th>
-    <th>Prefijo</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td rowspan="4">R1</td>
-    <td>Fa0/0</td>
-    <td>192.168.122.65</td>
-    <td>26</td>
-  </tr>
-  <tr>
-    <td>Fa0/1</td>
-    <td>192.168.122.137</td>
-    <td>30</td>
-  </tr>
-  <tr>
-    <td>Fa1/0</td>
-    <td>192.168.122.129</td>
-    <td>30</td>
-  </tr>
-  <tr>
-    <td>Fa1/1</td>
-    <td>192.168.122.133</td>
-    <td>30</td>
-  </tr>
-  <tr>
-    <td rowspan="1">R2</td>
-    <td>Fa0/0</td>
-    <td>192.168.122.130</td>
-    <td>30</td>
-  </tr>
-  <tr>
-    <td rowspan="2">R3</td>
-    <td>Fa0/0</td>
-    <td>192.168.122.1</td>
-    <td>26</td>
-  </tr>
-  <tr>
-    <td>Fa0/1</td>
-    <td>192.168.122.138</td>
-    <td>30</td>
-  </tr>
-  <tr>
-    <td rowspan="1">R4</td>
-    <td>Fa0/0</td>
-    <td>192.168.122.134</td>
-    <td>30</td>
-  </tr>
-  <tr>
-    <td rowspan="1">Python</td>
-    <td>Et0</td>
-    <td>192.168.122.100</td>
-    <td>26</td>
-  </tr>
-  <tr>
-    <td rowspan="1">PC2</td>
-    <td>Et0</td>
-    <td>192.168.122.50</td>
-    <td>26</td>
-  </tr>
-</tbody>
-</table>
-
 ### Configuración individual de cada dispositivo
 
 - [R1](./docs/configuration/r1.md)
@@ -148,3 +75,7 @@ Abrimos el navegador en localhost en el puerto 5000:
 ```bash
 deactivate
 ```
+
+## Ejecución
+
+El servidor es ejecutado:
