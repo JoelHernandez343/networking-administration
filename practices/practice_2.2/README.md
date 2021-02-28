@@ -47,6 +47,7 @@ Se creó la siguiente topología de red:
 
 **NOTAS**
 - Se utilizó el router **c7200**
+- Se utilizó el router **c3725** como EtherSwitch
 
 ## Configuración
 
