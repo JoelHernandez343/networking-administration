@@ -1,6 +1,6 @@
 exam2.db
 env/
-app/static/images/network.png
+**/app/static/images/network.png
 node_modules
 tailwind.generated.css
 **/app/static/fonts/*
