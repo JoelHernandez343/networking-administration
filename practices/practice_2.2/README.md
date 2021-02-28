@@ -1,4 +1,4 @@
-# Enrutamiento múltiple | Práctica 2.1
+# Vlan y EtherChannel | Práctica 2.2
 ## Descripción
 
 Se deberá de crear un programa en Python que nos permitan realizar altas, bajas y consultas de VLAN en la topología indicada.
