@@ -30,7 +30,7 @@ class Graph:
             plt.text(x, y, node, fontsize=10, ha="center", va="center")
 
         plt.savefig(
-            "./app/static/images/network.png", format="PNG", bbox_inches="tight"
+            "./src/app/static/images/network.png", format="PNG", bbox_inches="tight"
         )
         plt.clf()
         print("[Host] 'network.png' created")

@@ -10,7 +10,7 @@ from database.manage import router, interface, user
 from database.database import SessionLocal, engine
 
 try:
-    os.remove("app/static/images/network.png")
+    os.remove("src/app/static/images/network.png")
 except OSError:
     pass
 
