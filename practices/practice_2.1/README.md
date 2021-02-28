@@ -78,4 +78,32 @@ deactivate
 
 ## Ejecución
 
+Hacemos ping desde la vm a la pc1, no hay comunicación:
+![execution 00](./docs/images/ex00.png)
+
 El servidor es ejecutado:
+
+![execution 01](./docs/images/ex01.png)
+
+Abrimos el navegador en localhost en el puerto 5000: [http://localhost:5000/](http://localhost:5000/)
+
+
+![execution 02](./docs/images/ex02.png)
+
+Navegamos hacia `configure routing`, en la parte posterior de la página:
+
+![execution 03](./docs/images/ex03.png)
+
+Le damos clic al botón y el script de configuración se ejecutará:
+
+![execution 04](./docs/images/ex04.png)
+
+![execution 05](./docs/images/ex05.png)
+
+Finalmente, cuando el script se haya terminado de ejecutar, veremos el siguiente mensaje:
+
+![execution 06](./docs/images/ex06.png)
+
+Ahora, probamos la conexión con pc1, pc2 y pc3:
+
+![execution 07](./docs/images/ex07.png)
