@@ -6,7 +6,9 @@ En esta materia se desarrollan habilidades de abstracción, análisis y diseño 
 ## Tecnologías usadas
 
 - Python 3
-- Flask
+- Flask (Servidor en Python 3)
+- SQLAlchemy (Administrador de Base de Datos)
+- Matplotlib / networkx
 - HTML5
 - CSS3
 - Javascript
