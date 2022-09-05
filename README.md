@@ -6,6 +6,10 @@ En esta materia se desarrollan habilidades de abstracción, análisis y diseño 
 
 Este curso fue tomado en 2020 en la Escuela Superior de Cómputo con el profesor Ricardo Martines Rosales.
 
+## Imáganes de CISCO utilizadas
+
+Las imágenes utilizadas para el desarrollo de estas prácticas, exámanes y tareas se pueden encontrar en [este link (Google Drive)](https://drive.google.com/drive/folders/1t-URsJlFjx7Xntk3ihPQf8p2SpBYbWLl?usp=sharing).
+
 ## Tecnologías usadas
 
 -   Python 3
