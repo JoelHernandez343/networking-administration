@@ -2,7 +2,7 @@
 
 ## Descripción de la materia
 
-En esta materia se desarrollan habilidades de abstracción, análisis y diseño de sistemas de administración de redes de computadoras.
+En esta materia se desarrollaron habilidades de abstracción, análisis y diseño de sistemas de administración de servicios de redes de computadoras.
 
 Este curso fue tomado en 2020 en la Escuela Superior de Cómputo con el profesor Ricardo Martines Rosales.
 
