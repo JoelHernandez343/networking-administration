@@ -1,4 +1,4 @@
-# Administración de redes
+# Administración de servicios de Red
 
 ## Descripción de la materia
 
